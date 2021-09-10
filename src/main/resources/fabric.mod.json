@@ -19,11 +19,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "github.elmartino4.mechanicalFactory.MechanicalFactory"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "mechanical-factory.mixins.json"
   ],
 
   "depends": {

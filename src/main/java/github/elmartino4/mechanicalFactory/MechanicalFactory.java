@@ -1,8 +1,8 @@
-package net.fabricmc.example;
+package github.elmartino4.mechanicalFactory;
 
 import net.fabricmc.api.ModInitializer;
 
-public class ExampleMod implements ModInitializer {
+public class MechanicalFactory implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.

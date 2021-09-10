@@ -1,8 +1,8 @@
 # Mechanical Factory
-##Description
+## Description
 A factory style mod that uses mechanical processes to generate blocks items etc. All intended to work with vanilla clients.
 
-## <span style="color:Tomato;">Following features are planned</span>:
+## <font color="red">Following features are planned</font>:
 Features coloured Red are being implemented atm, Green features are already implemented
 
 ### Anvil

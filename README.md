@@ -2,8 +2,8 @@
 ## Description
 A factory style mod that uses mechanical processes to generate blocks items etc. All intended to work with vanilla clients.
 
-## <font color="red">Following features are planned</font>:
-Features coloured Red are being implemented atm, Green features are already implemented
+## Following features are planned:
+Features with :yellow_circle: are being implemented atm, features with :green_circle: are already implemented
 
 ### Anvil
 - cobble -> gravel

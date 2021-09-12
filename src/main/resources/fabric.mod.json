@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "mechanical-factory",
   "version": "${version}",
 
   "name": "Example Mod",
@@ -14,7 +14,7 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/mechanical-factory/icon.png",
 
   "environment": "*",
   "entrypoints": {

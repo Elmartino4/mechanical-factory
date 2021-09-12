@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import github.elmartino4.mechanicalFactory.config.ModConfig;
+import github.elmartino4.mechanicalFactory.MechanicalFactory;
 
 import java.util.*;
 
@@ -38,7 +38,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
     public int active = 0;
     public int lastBroken = 0;
 
-    HashMap<List<BlockState>, List<BlockState>> anvilMap = new HashMap<List<BlockState>, List<BlockState>>();
+
     public FallingBlockEntityMixin(EntityType<?> entityType_1, World world_1)
     {
         super(entityType_1, world_1);
@@ -47,15 +47,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
     @Inject(method = "tick()V", at = @At("TAIL"))
     private void onTick(CallbackInfo ci)
     {
-        if(anvilMap.size() == 0){
-            anvilMap.put(Arrays.asList(Blocks.COBBLESTONE.getDefaultState()), Arrays.asList(Blocks.GRAVEL.getDefaultState()));
-            anvilMap.put(Arrays.asList(Blocks.STONE.getDefaultState(), Blocks.GRAVEL.getDefaultState()), Arrays.asList(Blocks.ANDESITE.getDefaultState()));
-            anvilMap.put(Arrays.asList(Blocks.GRAVEL.getDefaultState(), Blocks.STONE.getDefaultState()), Arrays.asList(Blocks.ANDESITE.getDefaultState()));
-            anvilMap.put(Arrays.asList(Blocks.ANDESITE.getDefaultState()), Arrays.asList(Blocks.DIRT.getDefaultState()));
-            anvilMap.put(Arrays.asList(Blocks.NETHERRACK.getDefaultState(), Blocks.SOUL_SOIL.getDefaultState()), Arrays.asList(Blocks.SOUL_SAND.getDefaultState(), Blocks.SOUL_SOIL.getDefaultState()));
-        }
-
-        if(active > 5 * lastBroken){
+        if(active > 20 * lastBroken){
             active = 0;
             lastBroken = 0;
         }
@@ -87,7 +79,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
         }
 
         if(lastBroken == 0)
-            for (int i = ModConfig.INSTANCE.scanDistance; i > 0 && !match; i--) {
+            for (int i = 3; i > 0 && !match; i--) {
                 List<BlockState> blockList = new ArrayList<>();
 
                 for (int j = 0; j < i; j++) {
@@ -95,9 +87,9 @@ public abstract class FallingBlockEntityMixin extends Entity {
                 }
 
                 System.out.println(blockList.toString());
-                System.out.println("map size = " + anvilMap.size());
+                System.out.println("map size = " + MechanicalFactory.anvilMap.size());
 
-                List<BlockState> changeBlocks = anvilMap.get(blockList);
+                List<BlockState> changeBlocks = MechanicalFactory.anvilMap.get(blockList);
 
                 match = changeBlocks != null;//!changeBlocks.isEmpty();
 

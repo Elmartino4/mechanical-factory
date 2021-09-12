@@ -4,7 +4,8 @@
   "package": "github.elmartino4.mechanicalFactory.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "FallingBlockEntityMixin"
+    "FallingBlockEntityMixin",
+    "FluidBlockMixin"
   ],
   "client": [
   ],

@@ -27,8 +27,9 @@ public class FluidBlockMixin {
 
     @Inject(method = "receiveNeighborFluids", at = @At("HEAD"), cancellable = true)
     private void receiveNeighbours(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir){
-        System.out.println("0; " + new GeneratorIdentifier(Fluids.FLOWING_WATER.getDefaultState(), Fluids.EMPTY.getDefaultState(), Blocks.BLUE_ICE.getDefaultState(), null).toString());
-        System.out.println("1; " + new GeneratorIdentifier(Fluids.WATER.getDefaultState(), Fluids.EMPTY.getDefaultState(), Blocks.BLUE_ICE.getDefaultState(), null).toString());
+        GeneratorIdentifier temp = new GeneratorIdentifier(Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.BLUE_ICE.getDefaultState(), null);
+        System.out.println("0; " + temp.toString() + temp.hashCode(true, false));
+        System.out.println("1; " + temp.toString() + temp.hashCode(true, false));
 
         BlockState down = world.getBlockState(pos.down());
         BlockState out = null;
@@ -42,34 +43,30 @@ public class FluidBlockMixin {
 
             BlockState secondaryBlock = world.getBlockState(iteratedPos);
 
-            BlockState outTemp = MechanicalFactory.generatorMap.get(new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, null));
-            //System.out.println(new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, null).hashCode());
+            BlockState outTemp = MechanicalFactory.generatorMap.get(new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, down));
+
             out = (outTemp != null) ? outTemp : out;
 
-            //outTemp = MechanicalFactory.generatorMap.get(new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, down));
+            //System.out.println("called inject " + new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, null).toString());
 
-            //out = (outTemp != null) ? outTemp : out;
+            //Set<GeneratorIdentifier> keySet = MechanicalFactory.generatorMap.keySet();
 
-            System.out.println("called inject " + new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, null).toString());
-
-            Set<GeneratorIdentifier> keySet = MechanicalFactory.generatorMap.keySet();
-
-            System.out.println("key set; ");
+            /*System.out.println("key set; ");
             for (GeneratorIdentifier key :
                     keySet) {
-                System.out.println(key.toString());
-            }
+                //System.out.println(key.toString());
+            }*/
 
-            if(MechanicalFactory.generatorMap.containsKey(new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, null))) System.out.println("outTemp");
+            //if(MechanicalFactory.generatorMap.containsKey(new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, null))) System.out.println("outTemp");
         }
 
         if(out != null){
             world.setBlockState(pos, out);
             cir.setReturnValue(false);
-            System.out.println("found a match");
+            //System.out.println("found a match");
         }
 
-        System.out.println("2; " + new GeneratorIdentifier(Fluids.WATER.getDefaultState(), Fluids.EMPTY.getDefaultState(), Blocks.BLUE_ICE.getDefaultState(), null).toString());
+        //System.out.println("2; " + new GeneratorIdentifier(Fluids.WATER.getDefaultState(), Fluids.EMPTY.getDefaultState(), Blocks.BLUE_ICE.getDefaultState(), null).toString());
 
     }
 

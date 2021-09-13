@@ -5,7 +5,7 @@ A factory style mod that uses mechanical processes to generate blocks items etc.
 ## Following features are planned:
 Features with :yellow_circle: are being implemented atm, features with :green_circle: are already implemented
 
-### Anvil
+### Anvil :yellow_circle:
 - cobble -> gravel
 - gravel -> sand
 - sandstone -> sand
@@ -104,7 +104,7 @@ works by dispensing *input* into a scaffolding, after 40 redstone ticks an item 
   - sponge
   - any fish
 
-### Generator
+### Generator :green_circle:
 - water + blue ice -> frosted ice
 - water + purpur block + lava -> endstone
 - blue ice + netherbrick + lava -> netherack

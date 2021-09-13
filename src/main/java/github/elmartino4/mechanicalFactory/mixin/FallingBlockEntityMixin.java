@@ -73,7 +73,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
     private void onCollision(BlockPos hit){
         boolean match = false;
         if(lastBroken == 0){
-            System.out.println("call tick");
+            //System.out.println("call tick");
         }else{
             active++;
         }
@@ -86,14 +86,14 @@ public abstract class FallingBlockEntityMixin extends Entity {
                     blockList.add(world.getBlockState(hit.down(j)));
                 }
 
-                System.out.println(blockList.toString());
-                System.out.println("map size = " + MechanicalFactory.anvilMap.size());
+                //System.out.println(blockList.toString());
+                //System.out.println("map size = " + MechanicalFactory.anvilMap.size());
 
                 List<BlockState> changeBlocks = MechanicalFactory.anvilMap.get(blockList);
 
                 match = changeBlocks != null;//!changeBlocks.isEmpty();
 
-                System.out.println("match = " + match);
+                //System.out.println("match = " + match);
 
                 if(match){
 
@@ -107,7 +107,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
                         //System.out.println("j = " + i - j + ", id = " + changeBlocks.get(j));
                     }
 
-                    System.out.println("i = " + i + ", j = " + (i + changeBlocks.size()));
+                    //System.out.println("i = " + i + ", j = " + (i + changeBlocks.size()));
                     lastBroken = i - changeBlocks.size();
                 }
             }

@@ -10,13 +10,14 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.tag.Tag;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class MechanicalFactory implements ModInitializer {
 	public static HashMap<List<BlockState>, List<BlockState>> anvilMap = new HashMap<>();
-	public static HashMap<GeneratorIdentifier, BlockState> generatorMap = new HashMap<>();
+	public static ArrayList<GeneratorIdentifier> generatorMap = new ArrayList<>();
 
 	@Override
 	public void onInitialize() {
@@ -36,14 +37,17 @@ public class MechanicalFactory implements ModInitializer {
 		anvilMap.put(Arrays.asList(Blocks.TUFF.getDefaultState(), Blocks.GRAVEL.getDefaultState()), Arrays.asList(Blocks.DEEPSLATE.getDefaultState()));
 		anvilMap.put(Arrays.asList(Blocks.GRAVEL.getDefaultState(), Blocks.TUFF.getDefaultState()), Arrays.asList(Blocks.DEEPSLATE.getDefaultState()));
 
-		anvilMap.put(Arrays.asList(Blocks.NETHERRACK.getDefaultState(), Blocks.SOUL_SOIL.getDefaultState()), Arrays.asList(Blocks.SOUL_SAND.getDefaultState(), Blocks.SOUL_SOIL.getDefaultState()));
+		anvilMap.put(Arrays.asList(Blocks.NETHERRACK.getDefaultState(), Blocks.SOUL_SOIL.getDefaultState()), Arrays.asList(Blocks.SOUL_SOIL.getDefaultState(), Blocks.SOUL_SAND.getDefaultState()));
 
 		//GeneratorIdentifier(Tag.Identified< Fluid > primary, Tag.Identified<Fluid> secondaryFluid, BlockState secondaryBlock, BlockState underneathBlock)
 
-		generatorMap.put(new GeneratorIdentifier(Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.BLUE_ICE.getDefaultState(), null), Blocks.FROSTED_ICE.getDefaultState());
-		generatorMap.put(new GeneratorIdentifier(Fluids.WATER.getDefaultState(), null, Blocks.BLUE_ICE.getDefaultState(), null), Blocks.ICE.getDefaultState());
+		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.BLUE_ICE.getDefaultState(), null, Blocks.FROSTED_ICE.getDefaultState()));
+		generatorMap.add(new GeneratorIdentifier(Fluids.WATER.getDefaultState(), null, Blocks.BLUE_ICE.getDefaultState(), null, Blocks.ICE.getDefaultState()));
 
-		generatorMap.put(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.FLOWING_WATER.getDefaultState(), Blocks.AIR.getDefaultState(), Blocks.PURPUR_BLOCK.getDefaultState()), Blocks.END_STONE.getDefaultState());
-		generatorMap.put(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.WATER.getDefaultState(), Blocks.AIR.getDefaultState(), Blocks.PURPUR_BLOCK.getDefaultState()), Blocks.END_STONE.getDefaultState());
+		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.PURPUR_BLOCK.getDefaultState(), Blocks.END_STONE.getDefaultState()));
+		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.WATER.getDefaultState(), null, Blocks.PURPUR_BLOCK.getDefaultState(), Blocks.END_STONE.getDefaultState()));
+
+		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHERRACK.getDefaultState()));
+		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.WATER.getDefaultState(), null, Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHERRACK.getDefaultState()));
 	}
 }

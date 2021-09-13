@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "FallingBlockEntityMixin",
-    "FluidBlockMixin"
+    "FluidBlockMixin",
+    "BlockFileMixin"
   ],
   "client": [
   ],

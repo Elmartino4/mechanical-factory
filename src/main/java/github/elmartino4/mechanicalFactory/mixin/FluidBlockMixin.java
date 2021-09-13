@@ -27,12 +27,14 @@ public class FluidBlockMixin {
 
     @Inject(method = "receiveNeighborFluids", at = @At("HEAD"), cancellable = true)
     private void receiveNeighbours(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir){
-        GeneratorIdentifier temp = new GeneratorIdentifier(Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.BLUE_ICE.getDefaultState(), null);
-        System.out.println("0; " + temp.toString() + temp.hashCode(true, false));
-        System.out.println("1; " + temp.toString() + temp.hashCode(true, false));
+        //GeneratorIdentifier temp = new GeneratorIdentifier(Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.BLUE_ICE.getDefaultState(), null);
+        //System.out.println("0; " + temp.toString() + temp.hashCode(true, false));
+        //System.out.println("1; " + temp.toString() + temp.hashCode(true, false));
 
         BlockState down = world.getBlockState(pos.down());
-        BlockState out = null;
+
+        int matchVal = 1;
+        int matchIndex = -1;
 
         for (UnmodifiableIterator<Direction> unmodifiableIterator = field_34006.iterator(); unmodifiableIterator.hasNext(); ) {
             BlockPos iteratedPos = pos.offset(unmodifiableIterator.next().getOpposite());
@@ -43,42 +45,23 @@ public class FluidBlockMixin {
 
             BlockState secondaryBlock = world.getBlockState(iteratedPos);
 
-            BlockState outTemp = MechanicalFactory.generatorMap.get(new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, down));
+            //find best match
 
-            out = (outTemp != null) ? outTemp : out;
-
-            //System.out.println("called inject " + new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, null).toString());
-
-            //Set<GeneratorIdentifier> keySet = MechanicalFactory.generatorMap.keySet();
-
-            /*System.out.println("key set; ");
-            for (GeneratorIdentifier key :
-                    keySet) {
-                //System.out.println(key.toString());
-            }*/
-
-            //if(MechanicalFactory.generatorMap.containsKey(new GeneratorIdentifier(primary, secondaryFluid, secondaryBlock, null))) System.out.println("outTemp");
+            for (int i = 0; i < MechanicalFactory.generatorMap.size(); i++) {
+                GeneratorIdentifier gi = MechanicalFactory.generatorMap.get(i);
+                int tempMatchVal = gi.getSimilarity(primary, secondaryFluid, secondaryBlock, down);
+                if(tempMatchVal > matchVal){
+                    matchVal = tempMatchVal;
+                    matchIndex = i;
+                    //System.out.println("found a match");
+                }
+            }
         }
 
-        if(out != null){
-            world.setBlockState(pos, out);
+        if(matchIndex != -1){
+            world.setBlockState(pos, MechanicalFactory.generatorMap.get(matchIndex).getBlockOut());
             cir.setReturnValue(false);
-            //System.out.println("found a match");
+            System.out.println("found a match");
         }
-
-        //System.out.println("2; " + new GeneratorIdentifier(Fluids.WATER.getDefaultState(), Fluids.EMPTY.getDefaultState(), Blocks.BLUE_ICE.getDefaultState(), null).toString());
-
     }
-
-    /*@Inject(method = "receiveNeighborFluids",
-            cancellable = true,
-            at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/util/math/BlockPos;offset(Lnet/minecraft/util/math/Direction;)Lnet/minecraft/util/math/BlockPos;"
-            ))
-    private void receiveNeighboursLava(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir){
-        System.out.println("called inject");
-        if(){
-
-        }
-    }*/
 }

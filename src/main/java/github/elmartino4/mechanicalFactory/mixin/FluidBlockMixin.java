@@ -2,13 +2,11 @@ package github.elmartino4.mechanicalFactory.mixin;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.UnmodifiableIterator;
-import github.elmartino4.mechanicalFactory.GeneratorIdentifier;
+import github.elmartino4.mechanicalFactory.util.GeneratorIdentifier;
 import github.elmartino4.mechanicalFactory.MechanicalFactory;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -18,8 +16,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.Set;
 
 @Mixin(FluidBlock.class)
 public class FluidBlockMixin {

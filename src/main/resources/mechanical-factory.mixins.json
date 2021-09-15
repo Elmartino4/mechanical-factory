@@ -6,7 +6,7 @@
   "mixins": [
     "FallingBlockEntityMixin",
     "FluidBlockMixin",
-    "BlockFileMixin"
+    "ItemDispenserBehaviourMixin"
   ],
   "client": [
   ],

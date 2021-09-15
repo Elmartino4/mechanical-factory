@@ -1,23 +1,22 @@
 package github.elmartino4.mechanicalFactory;
 
 import github.elmartino4.mechanicalFactory.config.ModConfig;
+import github.elmartino4.mechanicalFactory.util.GeneratorIdentifier;
+import github.elmartino4.mechanicalFactory.util.SieveIdentifier;
+
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.tag.Tag;
+import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class MechanicalFactory implements ModInitializer {
 	public static HashMap<List<BlockState>, List<BlockState>> anvilMap = new HashMap<>();
 	public static ArrayList<GeneratorIdentifier> generatorMap = new ArrayList<>();
+	public static HashMap<Item, SieveIdentifier> sieveMap = new HashMap<>();
 
 	@Override
 	public void onInitialize() {
@@ -49,5 +48,18 @@ public class MechanicalFactory implements ModInitializer {
 
 		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHERRACK.getDefaultState()));
 		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.WATER.getDefaultState(), null, Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHERRACK.getDefaultState()));
+
+		//put(int weighing, int minRange, int maxRange, Item item)
+
+		//SieveIdentifier temp = new SieveIdentifier(25);
+		SieveIdentifier temp = new SieveIdentifier(0);
+
+		temp.put(10, 1, 2, Items.PURPUR_BLOCK);
+		temp.put(20, 1, 5, Items.CHORUS_FRUIT);
+		temp.put(15, 1, 5, Items.POPPED_CHORUS_FRUIT);
+		temp.put(1, 1, 3, Items.SHULKER_SHELL);
+		temp.put(2, 2, 2, Items.PHANTOM_MEMBRANE);
+
+		sieveMap.put(Items.END_STONE, temp.clone());
 	}
 }

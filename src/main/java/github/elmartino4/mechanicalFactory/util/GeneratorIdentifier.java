@@ -1,4 +1,4 @@
-package github.elmartino4.mechanicalFactory;
+package github.elmartino4.mechanicalFactory.util;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;

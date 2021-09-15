@@ -5,11 +5,19 @@ import com.google.common.collect.UnmodifiableIterator;
 import github.elmartino4.mechanicalFactory.util.GeneratorIdentifier;
 import github.elmartino4.mechanicalFactory.MechanicalFactory;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.tag.FluidTags;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -55,9 +63,14 @@ public class FluidBlockMixin {
         }
 
         if(matchIndex != -1){
-            world.setBlockState(pos, MechanicalFactory.generatorMap.get(matchIndex).getBlockOut());
+            BlockState out = MechanicalFactory.generatorMap.get(matchIndex).getBlockOut();
+            world.setBlockState(pos, out);
+            if(out.equals(Blocks.FROSTED_ICE.getDefaultState()))
+                world.getBlockTickScheduler().schedule(pos, Blocks.FROSTED_ICE, 50);
+
+            if (world.getFluidState(pos).isIn((Tag)FluidTags.LAVA)) world.syncWorldEvent(WorldEvents.LAVA_EXTINGUISHED, pos, 0);
             cir.setReturnValue(false);
-            System.out.println("found a match");
+            //System.out.println("found a match");
         }
     }
 }

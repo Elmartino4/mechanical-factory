@@ -6,7 +6,9 @@
   "mixins": [
     "FallingBlockEntityMixin",
     "FluidBlockMixin",
-    "ItemDispenserBehaviourMixin"
+    "ItemDispenserBehaviourMixin",
+    "IceBlockMixin",
+    "FrostedIceBlockMixin"
   ],
   "client": [
   ],

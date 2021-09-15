@@ -5,6 +5,8 @@ A factory style mod that uses mechanical processes to generate blocks items etc.
 ## Following features are planned:
 Features with :yellow_circle: are being implemented atm, features with :green_circle: are already implemented
 
+**TODO; MOVE THIS LIST TO GITHUB PROJECTS**
+
 ### Anvil :yellow_circle:
 - cobble -> gravel
 - gravel -> sand
@@ -24,7 +26,7 @@ Features with :yellow_circle: are being implemented atm, features with :green_ci
 - sand + lava source -> redsand
 - mossy cobble + ice -> prismarine
 
-### Seive
+### Seive :yellow_circle:
 works by dispensing *input* into a scaffolding, after 40 redstone ticks an item is dropped and the scaffolding is broken
 
 #### Formatting is as follows

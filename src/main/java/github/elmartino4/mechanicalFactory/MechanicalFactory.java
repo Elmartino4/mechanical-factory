@@ -51,8 +51,8 @@ public class MechanicalFactory implements ModInitializer {
 
 		//put(int weighing, int minRange, int maxRange, Item item)
 
-		//SieveIdentifier temp = new SieveIdentifier(25);
-		SieveIdentifier temp = new SieveIdentifier(0);
+		SieveIdentifier temp = new SieveIdentifier(25);
+		//SieveIdentifier temp = new SieveIdentifier(0);
 
 		temp.put(10, 1, 2, Items.PURPUR_BLOCK);
 		temp.put(20, 1, 5, Items.CHORUS_FRUIT);

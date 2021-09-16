@@ -6,6 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPointer;
@@ -16,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -37,16 +40,30 @@ public class ItemDispenserBehaviourMixin {
     private void argMixin(Args args) {
         //System.out.println("checked block = " + pos.offset((Direction)args.get(3)).toShortString());
         World world = args.get(0);
-        BlockState state = world.getBlockState(pos.offset((Direction)args.get(3)));
+        BlockPos pos2 = pos.offset((Direction)args.get(3));
+        BlockState state = world.getBlockState(pos2);
+
         if(state.getBlock() == Blocks.SCAFFOLDING){
             //System.out.println("is Scaffolding");
             SieveIdentifier id = MechanicalFactory.sieveMap.get(((ItemStack)args.get(1)).getItem());
             if(id != null){
                 ItemStack itm = id.selectItem(world.random);
                 System.out.println("set Item " + ((itm != null) ? itm.getTranslationKey() : "null"));
+
+                ItemEntity itmEnt;
+                itmEnt = new ItemEntity(world, pos2.getX() + 0.5, pos2.getY(), pos2.getZ() + 0.5, (ItemStack)args.get(1));
+
                 args.set(1, itm);
-                world.removeBlock(pos.offset((Direction)args.get(3)), false);
-                world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, pos.offset((Direction)args.get(3)), Block.getRawIdFromState(Blocks.SCAFFOLDING.getDefaultState()));
+                world.removeBlock(pos2, false);
+                world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, pos2, Block.getRawIdFromState(Blocks.SCAFFOLDING.getDefaultState()));
+
+
+                //itmEnt.setNeverDespawn();
+                itmEnt.setNoGravity(true);
+                itmEnt.setPickupDelayInfinite();
+                itmEnt.setVelocity(0, 0, 0);
+                world.spawnEntity(itmEnt);
+
             }
         }
     }

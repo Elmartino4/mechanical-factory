@@ -43,7 +43,7 @@ public class ItemDispenserBehaviourMixin {
         BlockPos pos2 = pos.offset((Direction)args.get(3));
         BlockState state = world.getBlockState(pos2);
 
-        if(state.getBlock() == Blocks.SCAFFOLDING){
+        if(state.getBlock() == Blocks.SCAFFOLDING && world.getBlockState(pos).getBlock() == Blocks.DROPPER){
             //System.out.println("is Scaffolding");
             SieveIdentifier id = MechanicalFactory.sieveMap.get(((ItemStack)args.get(1)).getItem());
             if(id != null){
@@ -51,14 +51,14 @@ public class ItemDispenserBehaviourMixin {
                 System.out.println("set Item " + ((itm != null) ? itm.getTranslationKey() : "null"));
 
                 ItemEntity itmEnt;
-                itmEnt = new ItemEntity(world, pos2.getX() + 0.5, pos2.getY(), pos2.getZ() + 0.5, (ItemStack)args.get(1));
+                itmEnt = new ItemEntity(world, pos2.getX() + 0.5, pos2.getY() + 0.2, pos2.getZ() + 0.5, (ItemStack)args.get(1));
 
                 args.set(1, itm);
                 world.removeBlock(pos2, false);
                 world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, pos2, Block.getRawIdFromState(Blocks.SCAFFOLDING.getDefaultState()));
 
 
-                //itmEnt.setNeverDespawn();
+                ((ItemEntityAccessor) itmEnt).setItemAge(6000 - 20 * MechanicalFactory.sieveTimer);
                 itmEnt.setNoGravity(true);
                 itmEnt.setPickupDelayInfinite();
                 itmEnt.setVelocity(0, 0, 0);

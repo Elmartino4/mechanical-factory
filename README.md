@@ -115,6 +115,7 @@ works by dispensing *input* into a scaffolding, after 30 game ticks an item is d
 - cobble -> mossycobble
 - stone bricks -> mossy stone bricks
 - copper -> exposed copper (and all other variants)
+- log + lava -> block of coal (small probability)
 
 ### Other features
 - dispenser with endrod in front breaks blocks it points at (requires a continuous redstone signal)

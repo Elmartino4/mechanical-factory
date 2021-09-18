@@ -27,7 +27,7 @@ Features with :yellow_circle: are being implemented atm, features with :green_ci
 - mossy cobble + ice -> prismarine
 
 ### Seive :yellow_circle:
-works by dispensing *input* into a scaffolding, after 40 redstone ticks an item is dropped and the scaffolding is broken
+works by dispensing *input* into a scaffolding, after 30 game ticks an item is dropped and the scaffolding is broken
 
 #### Formatting is as follows
  - input (weighing of no drop)
@@ -115,6 +115,7 @@ works by dispensing *input* into a scaffolding, after 40 redstone ticks an item 
 - cobble -> mossycobble
 - stone bricks -> mossy stone bricks
 - copper -> exposed copper (and all other variants)
+- log + lava -> block of coal (small probability)
 
 ### Other features
 - dispenser with endrod in front breaks blocks it points at (requires a continuous redstone signal)

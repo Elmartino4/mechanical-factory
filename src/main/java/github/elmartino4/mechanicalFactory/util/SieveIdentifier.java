@@ -25,6 +25,11 @@ public class SieveIdentifier {
         return new SieveIdentifier(this.defaultWeighing, this.data);
     }
 
+    public void empty(int defaultWeighing){
+        this.defaultWeighing = defaultWeighing;
+        data = new ArrayList<>();
+    }
+
     public ItemStack selectItem(Random random){
         int i = defaultWeighing;
 

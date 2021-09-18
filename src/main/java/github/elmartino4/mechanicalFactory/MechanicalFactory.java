@@ -9,7 +9,10 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.state.property.EnumProperty;
 
 import java.util.*;
 
@@ -17,7 +20,8 @@ public class MechanicalFactory implements ModInitializer {
 	public static HashMap<List<BlockState>, List<BlockState>> anvilMap = new HashMap<>();
 	public static ArrayList<GeneratorIdentifier> generatorMap = new ArrayList<>();
 	public static HashMap<Item, SieveIdentifier> sieveMap = new HashMap<>();
-	public static int sieveTimer = 4;
+	public static int sieveTimer = 40;
+
 	@Override
 	public void onInitialize() {
 		System.out.println("Loaded Mechanical Factory");

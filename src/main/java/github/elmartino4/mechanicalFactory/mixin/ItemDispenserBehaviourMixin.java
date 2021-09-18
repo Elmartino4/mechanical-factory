@@ -50,20 +50,9 @@ public class ItemDispenserBehaviourMixin {
                 ItemStack itm = id.selectItem(world.random);
                 System.out.println("set Item " + ((itm != null) ? itm.getTranslationKey() : "null"));
 
-                ItemEntity itmEnt;
-                itmEnt = new ItemEntity(world, pos2.getX() + 0.5, pos2.getY() + 0.2, pos2.getZ() + 0.5, (ItemStack)args.get(1));
-
                 args.set(1, itm);
                 world.removeBlock(pos2, false);
                 world.syncWorldEvent(WorldEvents.BLOCK_BROKEN, pos2, Block.getRawIdFromState(Blocks.SCAFFOLDING.getDefaultState()));
-
-
-                ((ItemEntityAccessor) itmEnt).setItemAge(6000 - 20 * MechanicalFactory.sieveTimer);
-                itmEnt.setNoGravity(true);
-                itmEnt.setPickupDelayInfinite();
-                itmEnt.setVelocity(0, 0, 0);
-                world.spawnEntity(itmEnt);
-
             }
         }
     }

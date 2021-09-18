@@ -9,7 +9,10 @@
     "ItemDispenserBehaviourMixin",
     "IceBlockMixin",
     "FrostedIceBlockMixin",
-    "ItemEntityAccessor"
+    "ItemEntityAccessor",
+    "DispenserBlockMixin",
+    "DispenserBlockEntityMixin",
+    "DropperBlockMixin"
   ],
   "client": [
   ],

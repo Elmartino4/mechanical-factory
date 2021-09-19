@@ -80,16 +80,16 @@ public abstract class FallingBlockEntityMixin extends Entity {
 
         if(lastBroken == 0)
             for (int i = 3; i > 0 && !match; i--) {
-                List<BlockState> blockList = new ArrayList<>();
+                List<Block> blockList = new ArrayList<>();
 
                 for (int j = 0; j < i; j++) {
-                    blockList.add(world.getBlockState(hit.down(j)));
+                    blockList.add(world.getBlockState(hit.down(j)).getBlock());
                 }
 
                 //System.out.println(blockList.toString());
                 //System.out.println("map size = " + MechanicalFactory.anvilMap.size());
 
-                List<BlockState> changeBlocks = MechanicalFactory.anvilMap.get(blockList);
+                List<Block> changeBlocks = MechanicalFactory.anvilMap.get(blockList);
 
                 match = changeBlocks != null;//!changeBlocks.isEmpty();
 
@@ -103,7 +103,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
                     }
 
                     for (int j = 0; j < changeBlocks.size(); j++) {
-                        world.setBlockState(hit.down(i - j - 1), changeBlocks.get(j), 3);
+                        world.setBlockState(hit.down(i - j - 1), changeBlocks.get(j).getDefaultState(), 3);
                         //System.out.println("j = " + i - j + ", id = " + changeBlocks.get(j));
                     }
 

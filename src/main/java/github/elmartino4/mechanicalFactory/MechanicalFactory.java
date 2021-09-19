@@ -5,6 +5,7 @@ import github.elmartino4.mechanicalFactory.util.GeneratorIdentifier;
 import github.elmartino4.mechanicalFactory.util.SieveIdentifier;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
@@ -17,7 +18,7 @@ import net.minecraft.state.property.EnumProperty;
 import java.util.*;
 
 public class MechanicalFactory implements ModInitializer {
-	public static HashMap<List<BlockState>, List<BlockState>> anvilMap = new HashMap<>();
+	public static HashMap<List<Block>, List<Block>> anvilMap = new HashMap<>();
 	public static ArrayList<GeneratorIdentifier> generatorMap = new ArrayList<>();
 	public static HashMap<Item, SieveIdentifier> sieveMap = new HashMap<>();
 	public static int sieveTimer = 40;
@@ -43,30 +44,49 @@ public class MechanicalFactory implements ModInitializer {
 	}
 
 	private static void initAnvilMap(){
-		anvilMap.put(Arrays.asList(Blocks.STONE.getDefaultState()), Arrays.asList(Blocks.COBBLESTONE.getDefaultState()));
-		anvilMap.put(Arrays.asList(Blocks.COBBLESTONE.getDefaultState()), Arrays.asList(Blocks.GRAVEL.getDefaultState()));
-		anvilMap.put(Arrays.asList(Blocks.GRAVEL.getDefaultState()), Arrays.asList(Blocks.SAND.getDefaultState()));
+		anvilMap.put(Arrays.asList(Blocks.STONE), Arrays.asList(Blocks.COBBLESTONE));
+		anvilMap.put(Arrays.asList(Blocks.COBBLESTONE), Arrays.asList(Blocks.GRAVEL));
+		anvilMap.put(Arrays.asList(Blocks.SANDSTONE), Arrays.asList(Blocks.SAND));
+		anvilMap.put(Arrays.asList(Blocks.GRAVEL), Arrays.asList(Blocks.SAND));
 
-		anvilMap.put(Arrays.asList(Blocks.STONE.getDefaultState(), Blocks.GRAVEL.getDefaultState()), Arrays.asList(Blocks.ANDESITE.getDefaultState()));
-		anvilMap.put(Arrays.asList(Blocks.GRAVEL.getDefaultState(), Blocks.STONE.getDefaultState()), Arrays.asList(Blocks.ANDESITE.getDefaultState()));
+		anvilMap.put(Arrays.asList(Blocks.STONE, Blocks.GRAVEL), Arrays.asList(Blocks.ANDESITE));
+		anvilMap.put(Arrays.asList(Blocks.GRAVEL, Blocks.STONE), Arrays.asList(Blocks.ANDESITE));
 
-		anvilMap.put(Arrays.asList(Blocks.COBBLESTONE.getDefaultState(), Blocks.GRAVEL.getDefaultState()), Arrays.asList(Blocks.TUFF.getDefaultState()));
-		anvilMap.put(Arrays.asList(Blocks.GRAVEL.getDefaultState(), Blocks.COBBLESTONE.getDefaultState()), Arrays.asList(Blocks.TUFF.getDefaultState()));
+		anvilMap.put(Arrays.asList(Blocks.COBBLESTONE, Blocks.GRAVEL), Arrays.asList(Blocks.TUFF));
+		anvilMap.put(Arrays.asList(Blocks.GRAVEL, Blocks.COBBLESTONE), Arrays.asList(Blocks.TUFF));
 
-		anvilMap.put(Arrays.asList(Blocks.TUFF.getDefaultState(), Blocks.GRAVEL.getDefaultState()), Arrays.asList(Blocks.DEEPSLATE.getDefaultState()));
-		anvilMap.put(Arrays.asList(Blocks.GRAVEL.getDefaultState(), Blocks.TUFF.getDefaultState()), Arrays.asList(Blocks.DEEPSLATE.getDefaultState()));
+		anvilMap.put(Arrays.asList(Blocks.TUFF, Blocks.GRAVEL), Arrays.asList(Blocks.DEEPSLATE));
+		anvilMap.put(Arrays.asList(Blocks.GRAVEL, Blocks.TUFF), Arrays.asList(Blocks.DEEPSLATE));
 
-		anvilMap.put(Arrays.asList(Blocks.NETHERRACK.getDefaultState(), Blocks.SOUL_SOIL.getDefaultState()), Arrays.asList(Blocks.SOUL_SOIL.getDefaultState(), Blocks.SOUL_SAND.getDefaultState()));
+		anvilMap.put(Arrays.asList(Blocks.NETHERRACK, Blocks.SOUL_SOIL), Arrays.asList(Blocks.SOUL_SOIL, Blocks.SOUL_SAND));
+
+		anvilMap.put(Arrays.asList(Blocks.STONE_BRICKS), Arrays.asList(Blocks.CRACKED_STONE_BRICKS));
+		anvilMap.put(Arrays.asList(Blocks.DEEPSLATE_BRICKS), Arrays.asList(Blocks.CRACKED_DEEPSLATE_BRICKS));
+
+		anvilMap.put(Arrays.asList(Blocks.ANDESITE, Blocks.SAND), Arrays.asList(Blocks.CALCITE));
+		anvilMap.put(Arrays.asList(Blocks.SAND, Blocks.ANDESITE), Arrays.asList(Blocks.CALCITE));
+
+		anvilMap.put(Arrays.asList(Blocks.STONE, Blocks.SAND), Arrays.asList(Blocks.DIORITE));
+		anvilMap.put(Arrays.asList(Blocks.SAND, Blocks.STONE), Arrays.asList(Blocks.DIORITE));
+
+		anvilMap.put(Arrays.asList(Blocks.STONE, Blocks.GRAVEL), Arrays.asList(Blocks.ANDESITE));
+		anvilMap.put(Arrays.asList(Blocks.GRAVEL, Blocks.STONE), Arrays.asList(Blocks.ANDESITE));
+
+		anvilMap.put(Arrays.asList(Blocks.STONE, Blocks.RED_SAND), Arrays.asList(Blocks.GRANITE));
+		anvilMap.put(Arrays.asList(Blocks.RED_SAND, Blocks.STONE), Arrays.asList(Blocks.GRANITE));
+
+		anvilMap.put(Arrays.asList(Blocks.MOSSY_COBBLESTONE, Blocks.ICE), Arrays.asList(Blocks.PRISMARINE));
+		anvilMap.put(Arrays.asList(Blocks.ICE, Blocks.MOSSY_COBBLESTONE), Arrays.asList(Blocks.PRISMARINE));
 	}
 
 	private static void initGeneratorMap(){
-		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.BLUE_ICE.getDefaultState(), null, Blocks.FROSTED_ICE.getDefaultState()));
-		generatorMap.add(new GeneratorIdentifier(Fluids.WATER.getDefaultState(), null, Blocks.BLUE_ICE.getDefaultState(), null, Blocks.ICE.getDefaultState()));
+		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_WATER, null, Blocks.BLUE_ICE, null, Blocks.FROSTED_ICE));
+		generatorMap.add(new GeneratorIdentifier(Fluids.WATER, null, Blocks.BLUE_ICE, null, Blocks.ICE));
 
-		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.PURPUR_BLOCK.getDefaultState(), Blocks.END_STONE.getDefaultState()));
-		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.WATER.getDefaultState(), null, Blocks.PURPUR_BLOCK.getDefaultState(), Blocks.END_STONE.getDefaultState()));
+		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA, Fluids.FLOWING_WATER, null, Blocks.PURPUR_BLOCK, Blocks.END_STONE));
+		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA, Fluids.WATER, null, Blocks.PURPUR_BLOCK, Blocks.END_STONE));
 
-		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.FLOWING_WATER.getDefaultState(), null, Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHERRACK.getDefaultState()));
-		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA.getDefaultState(), Fluids.WATER.getDefaultState(), null, Blocks.NETHER_BRICKS.getDefaultState(), Blocks.NETHERRACK.getDefaultState()));
+		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA, Fluids.FLOWING_WATER, null, Blocks.NETHER_BRICKS, Blocks.NETHERRACK));
+		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA, Fluids.WATER, null, Blocks.NETHER_BRICKS, Blocks.NETHERRACK));
 	}
 }

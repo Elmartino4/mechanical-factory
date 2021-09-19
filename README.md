@@ -7,23 +7,22 @@ Features with :yellow_circle: are being implemented atm, features with :green_ci
 
 **TODO; MOVE THIS LIST TO GITHUB PROJECTS**
 
-### Anvil :yellow_circle:
+### Anvil :green_circle:
 - cobble -> gravel
 - gravel -> sand
 - sandstone -> sand
 - chisieled stone bricks -> stone bricks
 - stone -> cobblestone
-- cracked stone bricks -> stone
 - cobblestone + gravel -> tuff
 - tuff + gravel -> deepslate
 - andesite + sand -> calcite
 - stone + sand -> diorite
 - stone + gravel -> andersite
 - stone + redsand -> granite
-- concrete -> concrete powder
+- concrete -> concrete powder :yellow_circle:
 - netherrack + soul soil -> soul sand + soul soil
-- netherrack + flowing lava -> magma block
-- sand + lava source -> redsand
+- netherrack + flowing lava -> magma block :yellow_circle:
+- sand + lava source -> redsand :yellow_circle:
 - mossy cobble + ice -> prismarine
 
 ### Seive :yellow_circle:

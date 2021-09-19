@@ -4,9 +4,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.UnmodifiableIterator;
 import github.elmartino4.mechanicalFactory.util.GeneratorIdentifier;
 import github.elmartino4.mechanicalFactory.MechanicalFactory;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.sound.SoundCategory;
@@ -35,7 +37,7 @@ public class FluidBlockMixin {
         //System.out.println("0; " + temp.toString() + temp.hashCode(true, false));
         //System.out.println("1; " + temp.toString() + temp.hashCode(true, false));
 
-        BlockState down = world.getBlockState(pos.down());
+        Block down = world.getBlockState(pos.down()).getBlock();
 
         int matchVal = 1;
         int matchIndex = -1;
@@ -43,11 +45,11 @@ public class FluidBlockMixin {
         for (UnmodifiableIterator<Direction> unmodifiableIterator = field_34006.iterator(); unmodifiableIterator.hasNext(); ) {
             BlockPos iteratedPos = pos.offset(unmodifiableIterator.next().getOpposite());
 
-            FluidState primary = world.getFluidState(pos);
+            Fluid primary = world.getFluidState(pos).getFluid();
 
-            FluidState secondaryFluid = world.getFluidState(iteratedPos);
+            Fluid secondaryFluid = world.getFluidState(iteratedPos).getFluid();
 
-            BlockState secondaryBlock = world.getBlockState(iteratedPos);
+            Block secondaryBlock = world.getBlockState(iteratedPos).getBlock();
 
             //find best match
 
@@ -63,7 +65,7 @@ public class FluidBlockMixin {
         }
 
         if(matchIndex != -1){
-            BlockState out = MechanicalFactory.generatorMap.get(matchIndex).getBlockOut();
+            BlockState out = MechanicalFactory.generatorMap.get(matchIndex).getBlockOut().getDefaultState();
             world.setBlockState(pos, out);
             if(out.equals(Blocks.FROSTED_ICE.getDefaultState()))
                 world.getBlockTickScheduler().schedule(pos, Blocks.FROSTED_ICE, 50);

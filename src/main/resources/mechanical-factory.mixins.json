@@ -12,7 +12,8 @@
     "ItemEntityAccessor",
     "DispenserBlockMixin",
     "DispenserBlockEntityMixin",
-    "DropperBlockMixin"
+    "DropperBlockMixin",
+    "BuddingAmethystBlockMixin"
   ],
   "client": [
   ],

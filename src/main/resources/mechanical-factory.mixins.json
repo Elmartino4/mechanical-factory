@@ -13,7 +13,8 @@
     "DispenserBlockMixin",
     "DispenserBlockEntityMixin",
     "DropperBlockMixin",
-    "BuddingAmethystBlockMixin"
+    "BuddingAmethystBlockMixin",
+    "AbstractBlockStateMixin"
   ],
   "client": [
   ],

@@ -4,6 +4,7 @@ import github.elmartino4.mechanicalFactory.config.ModConfig;
 import github.elmartino4.mechanicalFactory.util.GeneratorIdentifier;
 import github.elmartino4.mechanicalFactory.util.SieveIdentifier;
 
+import github.elmartino4.mechanicalFactory.util.WeatheringMap;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -20,6 +21,8 @@ import java.util.*;
 public class MechanicalFactory implements ModInitializer {
 	public static HashMap<List<Block>, List<Block>> anvilMap = new HashMap<>();
 	public static ArrayList<GeneratorIdentifier> generatorMap = new ArrayList<>();
+	public static WeatheringMap weatheringMap = new WeatheringMap();
+
 	public static HashMap<Item, SieveIdentifier> sieveMap = new HashMap<>();
 	public static int sieveTimer = 40;
 
@@ -30,6 +33,7 @@ public class MechanicalFactory implements ModInitializer {
 
 		initAnvilMap();
 		initGeneratorMap();
+		initWeatherMap();
 
 		SieveIdentifier temp = new SieveIdentifier(25);
 		//SieveIdentifier temp = new SieveIdentifier(0);
@@ -41,6 +45,8 @@ public class MechanicalFactory implements ModInitializer {
 		temp.put(2, 2, 2, Items.PHANTOM_MEMBRANE);
 
 		sieveMap.put(Items.END_STONE, temp.clone());
+
+
 	}
 
 	private static void initAnvilMap(){
@@ -88,5 +94,16 @@ public class MechanicalFactory implements ModInitializer {
 
 		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA, Fluids.FLOWING_WATER, null, Blocks.NETHER_BRICKS, Blocks.NETHERRACK));
 		generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA, Fluids.WATER, null, Blocks.NETHER_BRICKS, Blocks.NETHERRACK));
+	}
+
+	private static void initWeatherMap(){
+		weatheringMap.put(Blocks.COBBLESTONE, Fluids.WATER, Blocks.MOSSY_COBBLESTONE, 0.7F);
+		weatheringMap.put(Blocks.COBBLESTONE, Fluids.FLOWING_WATER, Blocks.MOSSY_COBBLESTONE, 0.3F);
+
+		weatheringMap.put(Blocks.OAK_LOG, Fluids.FLOWING_LAVA, Blocks.COAL_BLOCK, 0.9F);
+		weatheringMap.put(Blocks.OAK_LOG, Fluids.LAVA, Blocks.COAL_BLOCK, 1.0F);
+
+		weatheringMap.put(Blocks.STONE_BRICKS, Fluids.WATER, Blocks.MOSSY_STONE_BRICKS, 0.7F);
+		weatheringMap.put(Blocks.STONE_BRICKS, Fluids.FLOWING_WATER, Blocks.MOSSY_STONE_BRICKS, 0.3F);
 	}
 }

@@ -33,7 +33,7 @@ works by dispensing *input* into a scaffolding, after 30 game ticks an item is d
  - output (relative weighing, [min quanitiy - max quantity])
 
 #### Values;
- - endstone (25) ->
+ - endstone (25) -> :green_circle:
    - purpur (10, [1-2])
    - chorus fruit (20, [1-5])
    - popped chorus fruit (15, [1-5])
@@ -110,10 +110,10 @@ works by dispensing *input* into a scaffolding, after 30 game ticks an item is d
 - water + purpur block + lava -> endstone
 - blue ice + netherbrick + lava -> netherack
 
-### Weathering
+### Weathering :green_circle:
 - cobble -> mossycobble
 - stone bricks -> mossy stone bricks
-- copper -> exposed copper (and all other variants)
+- copper -> exposed copper (and all other variants) :yellow_circle:
 - log + lava -> block of coal (small probability)
 
 ### Other features
@@ -121,4 +121,5 @@ works by dispensing *input* into a scaffolding, after 30 game ticks an item is d
 - dispenser with center popped chorus fruit uses one and places a block
 - piston with a netherwart block in front of it can push lava source blocks
 - piston with a wet sponge in front of it can push water source blocks
-
+- dispenser with bucket pointed into a full cauldron will remove its contents
+- piston can push budding amethyst :green_circle:

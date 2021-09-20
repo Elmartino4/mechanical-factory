@@ -12,7 +12,9 @@ import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
@@ -38,9 +40,46 @@ public abstract class DispenserBlockMixin {
 
     @Unique int slot;
 
-    //Lnet/minecraft/inventory/Inventory;getStack(I)Lnet/minecraft/item/ItemStack;
-    //Lnet/minecraft/block/entity/DispenserBlockEntity;getStack(I)Lnet/minecraft/item/ItemStack;
-    //INVOKEVIRTUAL net/minecraft/block/entity/DispenserBlockEntity.getStack (I)Lnet/minecraft/item/ItemStack;
+    @Inject(method = "dispense", at = @At("HEAD"), cancellable = true)
+    private void injectDispense(ServerWorld world, BlockPos pos, CallbackInfo ci){
+
+        BlockPointer pointer = (BlockPointer) new BlockPointerImpl((ServerWorld) world, pos);
+        Direction direc = (Direction)pointer.getBlockState().get((Property)DispenserBlock.FACING);
+
+        if(world.getBlockState(pos).getBlock() == Blocks.DISPENSER){
+            System.out.println("called trigger");
+
+            DispenserBlockEntity ent = (DispenserBlockEntity)world.getBlockEntity(pos);
+
+            if(ent.getStack(4).getItem() == Items.POPPED_CHORUS_FRUIT){
+
+                int slot = ent.chooseNonEmptySlot();
+                for (int i = 0; i < 20 && slot == 4; i++) {
+                    slot = ent.chooseNonEmptySlot();
+                }
+
+                Block toPlace = Block.getBlockFromItem(ent.getStack(slot).getItem());
+
+                if(slot != 4 && toPlace != Blocks.AIR){
+                    if(world.isAir(pos.offset(direc)) || toPlace == Blocks.DRAGON_EGG){
+
+                        world.playSound(null, pos.offset(direc),
+                                toPlace.getSoundGroup(toPlace.getDefaultState()).getPlaceSound(),
+                                SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+                        world.setBlockState(pos.offset(direc), toPlace.getDefaultState());
+                        ent.removeStack(slot, 1);
+                        ent.removeStack(4, 1);
+
+                        System.out.println("cancelled to " + toPlace.toString());
+                        ci.cancel();
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
     @Inject(method="neighborUpdate", at = @At("HEAD"), cancellable = true)
     private void injectUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify, CallbackInfo ci){
         boolean hasPower = world.isReceivingRedstonePower(pos) || world.isReceivingRedstonePower(pos.up());
@@ -49,7 +88,7 @@ public abstract class DispenserBlockMixin {
         BlockPointer pointer = (BlockPointer) new BlockPointerImpl((ServerWorld) world, pos);
         Direction direc = (Direction)pointer.getBlockState().get((Property)DispenserBlock.FACING);
 
-        if(world.getBlockTickScheduler().isScheduled(pos, Blocks.DROPPER)){
+        if(world.getBlockTickScheduler().isScheduled(pos, Blocks.DROPPER) || world.getBlockTickScheduler().isScheduled(pos, Blocks.DISPENSER)){
             ci.cancel();
             return;
         }

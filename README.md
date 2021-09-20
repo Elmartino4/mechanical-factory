@@ -118,7 +118,7 @@ works by dispensing *input* into a scaffolding, after 30 game ticks an item is d
 
 ### Other features
 - dispenser with endrod in front breaks blocks it points at (requires a continuous redstone signal)
-- dispenser with center popped chorus fruit uses one and places a block
+- dispenser with center popped chorus fruit uses one and places a block :green_circle:
 - piston with a netherwart block in front of it can push lava source blocks
 - piston with a wet sponge in front of it can push water source blocks
 - dispenser with bucket pointed into a full cauldron will remove its contents

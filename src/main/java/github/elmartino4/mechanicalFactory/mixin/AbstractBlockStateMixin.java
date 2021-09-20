@@ -22,7 +22,7 @@ public abstract class AbstractBlockStateMixin {
     private void checkInject(CallbackInfoReturnable<Boolean> cir){
         if (MechanicalFactory.weatheringMap.checkContains(getBlock())){
             cir.setReturnValue(true);
-            System.out.println("found block");
+            //System.out.println("found block");
         }
     }
 

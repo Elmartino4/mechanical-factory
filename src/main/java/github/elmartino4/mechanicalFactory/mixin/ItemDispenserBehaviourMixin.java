@@ -48,7 +48,7 @@ public class ItemDispenserBehaviourMixin {
             SieveIdentifier id = MechanicalFactory.sieveMap.get(((ItemStack)args.get(1)).getItem());
             if(id != null){
                 ItemStack itm = id.selectItem(world.random);
-                System.out.println("set Item " + ((itm != null) ? itm.getTranslationKey() : "null"));
+                //System.out.println("set Item " + ((itm != null) ? itm.getTranslationKey() : "null"));
 
                 args.set(1, itm);
                 world.removeBlock(pos2, false);

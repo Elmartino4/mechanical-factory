@@ -47,7 +47,7 @@ public abstract class DispenserBlockMixin {
         Direction direc = (Direction)pointer.getBlockState().get((Property)DispenserBlock.FACING);
 
         if(world.getBlockState(pos).getBlock() == Blocks.DISPENSER){
-            System.out.println("called trigger");
+            //System.out.println("called trigger");
 
             DispenserBlockEntity ent = (DispenserBlockEntity)world.getBlockEntity(pos);
 
@@ -71,7 +71,7 @@ public abstract class DispenserBlockMixin {
                         ent.removeStack(slot, 1);
                         ent.removeStack(4, 1);
 
-                        System.out.println("cancelled to " + toPlace.toString());
+                        //System.out.println("cancelled to " + toPlace.toString());
                         ci.cancel();
                         return;
                     }
@@ -112,7 +112,7 @@ public abstract class DispenserBlockMixin {
             if(!MechanicalFactory.sieveMap.containsKey(itm)){
                 ((DispenserBlockEntityAccess)ent).setItem(null);
                 ((DispenserBlockEntityAccess)ent).setItemIndex(slot);
-                System.out.println("stopped cancel because of " + itm.getTranslationKey());
+                //System.out.println("stopped cancel because of " + itm.getTranslationKey());
                 return;
             }
 
@@ -133,7 +133,7 @@ public abstract class DispenserBlockMixin {
             itmEnt.setVelocity(0, 0, 0);
             world.spawnEntity(itmEnt);
 
-            System.out.println("cancelled ");
+            //System.out.println("cancelled ");
 
             //Item
             ((DispenserBlockEntityAccess)ent).setItem(itm);

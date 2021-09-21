@@ -14,7 +14,9 @@
     "DispenserBlockEntityMixin",
     "DropperBlockMixin",
     "BuddingAmethystBlockMixin",
-    "AbstractBlockStateMixin"
+    "AbstractBlockStateMixin",
+    "FullBucketDispenserBehaviorMixin",
+    "EmptyBucketDispenserBehaviorMixin"
   ],
   "client": [
   ],

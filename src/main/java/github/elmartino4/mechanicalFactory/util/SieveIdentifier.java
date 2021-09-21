@@ -40,7 +40,7 @@ public class SieveIdentifier {
         int val = random.nextInt(i);
 
         if(val < defaultWeighing){
-            System.out.println("returned null due to default weighing");
+            //System.out.println("returned null due to default weighing");
             return null;
         }
 
@@ -53,7 +53,7 @@ public class SieveIdentifier {
             i += aData.getWeighing();
         }
 
-        System.out.println("returned null due to failed get");
+        //System.out.println("returned null due to failed get");
         return null;
     }
 

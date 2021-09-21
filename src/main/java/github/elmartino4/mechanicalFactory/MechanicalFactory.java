@@ -34,19 +34,7 @@ public class MechanicalFactory implements ModInitializer {
 		initAnvilMap();
 		initGeneratorMap();
 		initWeatherMap();
-
-		SieveIdentifier temp = new SieveIdentifier(25);
-		//SieveIdentifier temp = new SieveIdentifier(0);
-
-		temp.put(10, 1, 2, Items.PURPUR_BLOCK);
-		temp.put(20, 1, 5, Items.CHORUS_FRUIT);
-		temp.put(15, 1, 5, Items.POPPED_CHORUS_FRUIT);
-		temp.put(1, 1, 3, Items.SHULKER_SHELL);
-		temp.put(2, 2, 2, Items.PHANTOM_MEMBRANE);
-
-		sieveMap.put(Items.END_STONE, temp.clone());
-
-
+		initSieveMap();
 	}
 
 	private static void initAnvilMap(){
@@ -105,5 +93,127 @@ public class MechanicalFactory implements ModInitializer {
 
 		weatheringMap.put(Blocks.STONE_BRICKS, Fluids.WATER, Blocks.MOSSY_STONE_BRICKS, 0.7F);
 		weatheringMap.put(Blocks.STONE_BRICKS, Fluids.FLOWING_WATER, Blocks.MOSSY_STONE_BRICKS, 0.3F);
+	}
+
+	private static void initSieveMap(){
+		SieveIdentifier temp = new SieveIdentifier(25);
+
+		temp.put(10, 1, 2, Items.PURPUR_BLOCK);
+		temp.put(20, 1, 5, Items.CHORUS_FRUIT);
+		temp.put(15, 1, 5, Items.POPPED_CHORUS_FRUIT);
+		temp.put(1, 1, 3, Items.SHULKER_SHELL);
+		temp.put(2, 2, 2, Items.PHANTOM_MEMBRANE);
+
+		sieveMap.put(Items.END_STONE, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(6);
+
+		temp.put(3, 1, 3, Items.QUARTZ);
+		temp.put(3, 2, 6, Items.GOLD_NUGGET);
+		temp.put(7, 1, 10, Items.ROTTEN_FLESH);
+		temp.put(2, 1, 2, Items.GOLD_INGOT);
+
+		sieveMap.put(Items.NETHERRACK, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(8);
+
+		temp.put(4, 1, 1, Items.CRIMSON_FUNGUS);
+		temp.put(4, 1, 1, Items.WARPED_FUNGUS);
+		temp.put(1, 1, 3, Items.GHAST_TEAR);
+		temp.put(3, 2, 5, Items.NETHER_WART);
+
+		sieveMap.put(Items.SOUL_SAND, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(12);
+
+		temp.put(8, 2, 3, Items.WHEAT_SEEDS);
+		temp.put(5, 2, 3, Items.BEETROOT_SEEDS);
+		temp.put(4, 1, 3, Items.MELON_SEEDS);
+		temp.put(4, 1, 3, Items.PUMPKIN_SEEDS);
+		temp.put(5, 1, 2, Items.POTATO);
+		temp.put(5, 1, 2, Items.CARROT);
+		temp.put(9, 2, 4, Items.BONE_MEAL);
+
+		sieveMap.put(Items.DIRT, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(12);
+
+		temp.put(14, 1, 1, Items.SAND);
+		temp.put(3, 1, 1, Items.REDSTONE);
+		temp.put(2, 1, 3, Items.GUNPOWDER);
+		temp.put(3, 2, 4, Items.GLOWSTONE_DUST);
+		temp.put(2, 1, 2, Items.BLAZE_POWDER);
+		temp.put(4, 2, 5, Items.RAW_GOLD);
+
+		sieveMap.put(Items.RED_SAND, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(18);
+
+		temp.put(6, 2, 3, Items.CLAY_BALL);
+		temp.put(3, 1, 3, Items.QUARTZ);
+		temp.put(2, 2, 3, Items.RAW_IRON);
+		temp.put(3, 2, 3, Items.RAW_COPPER);
+		temp.put(12, 1, 2, Items.CACTUS);
+
+		sieveMap.put(Items.SAND, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(8);
+
+		temp.put(2, 1, 3, Items.OAK_SAPLING);
+		temp.put(2, 1, 2, Items.SPRUCE_SAPLING);
+		temp.put(2, 1, 2, Items.BIRCH_SAPLING);
+		temp.put(1, 1, 1, Items.ACACIA_SAPLING);
+		temp.put(1, 1, 1, Items.JUNGLE_SAPLING);
+		temp.put(3, 2, 4, Items.PUMPKIN_SEEDS);
+		temp.put(3, 2, 4, Items.MELON_SLICE);
+
+		sieveMap.put(Items.GRASS_BLOCK, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(12);
+
+		temp.put(12, 1, 4, Items.FLINT);
+		temp.put(6, 2, 3, Items.COAL);
+		temp.put(2, 1, 3, Items.RAW_IRON);
+		temp.put(2, 1, 2, Items.RAW_GOLD);
+		temp.put(3, 2, 3, Items.RAW_COPPER);
+
+		sieveMap.put(Items.GRAVEL, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(5);
+
+		temp.put(3, 3, 7, Items.RAW_IRON);
+		temp.put(4, 1, 1, Items.STONE);
+		temp.put(1, 1, 1, Items.DEEPSLATE);
+
+		sieveMap.put(Items.TUFF, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(6);
+
+		temp.put(5, 3, 8, Items.RAW_COPPER);
+		temp.put(6, 1, 1, Items.STONE);
+
+		sieveMap.put(Items.TUFF, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(8);
+
+		temp.put(3, 1, 4, Items.PRISMARINE_SHARD);
+		temp.put(3, 1, 4, Items.PRISMARINE_CRYSTALS);
+		temp.put(2, 1, 2, Items.WET_SPONGE);
+		temp.put(7, 3, 5, Items.COD);
+		temp.put(6, 3, 5, Items.SALMON);
+		temp.put(4, 3, 4, Items.TROPICAL_FISH);
+		temp.put(3, 2, 4, Items.PUFFERFISH);
+
+		sieveMap.put(Items.PRISMARINE, temp.clone());
 	}
 }

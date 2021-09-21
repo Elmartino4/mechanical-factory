@@ -26,7 +26,7 @@ public class DropperBlockMixin {
 
     @ModifyVariable(method = "dispense", at = @At("STORE"), ordinal = 1)
     private ItemStack modifyOutStack(ItemStack original){
-        System.out.println(original.toString());
+        //System.out.println(original.toString());
         DispenserBlockEntity ent = (DispenserBlockEntity)world.getBlockEntity(pos);
         Item item = ((DispenserBlockEntityAccess)ent).getItem();
         if(item != null)

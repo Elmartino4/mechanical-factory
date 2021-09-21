@@ -18,7 +18,7 @@ import java.util.Random;
 public abstract class AbstractBlockStateMixin {
     @Shadow abstract Block getBlock();
 
-    @Inject(method = "hasRandomTicks", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "hasRandomTicks()Z", at = @At("HEAD"), cancellable = true)
     private void checkInject(CallbackInfoReturnable<Boolean> cir){
         if (MechanicalFactory.weatheringMap.checkContains(getBlock())){
             cir.setReturnValue(true);
@@ -26,7 +26,7 @@ public abstract class AbstractBlockStateMixin {
         }
     }
 
-    @Inject(method = "randomTick", at = @At("HEAD"))
+    @Inject(method = "randomTick(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V", at = @At("HEAD"))
     private void doTick(ServerWorld world, BlockPos pos, Random random, CallbackInfo ci){
         MechanicalFactory.weatheringMap.tick(world, pos, random);
     }

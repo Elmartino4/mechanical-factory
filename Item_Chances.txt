@@ -82,5 +82,5 @@ prismarine crystal - 3 (1-4)
 sponge - 2 (1-2)
 cod - 7 (3-5)
 salmon - 6 (3-5)
-pufferfish - 3
-tropicalfish - 4
+pufferfish - 3 (2-4)
+tropicalfish - 4 (3-4)

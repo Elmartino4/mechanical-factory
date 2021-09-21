@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(targets = "net/minecraft/block/dispenser/DispenserBehavior$8")
 public class FullBucketDispenserBehaviorMixin {
-    @Inject(method = "dispenseSilently", cancellable = true, at = @At(value = "INVOKE",
+    @Inject(method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;", cancellable = true, at = @At(value = "INVOKE",
             target = "Lnet/minecraft/block/dispenser/ItemDispenserBehavior;dispense(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"))
     private void dispenseInject(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir){
         BlockPos outPos = pointer.getPos().offset((Direction)pointer.getBlockState().get(DispenserBlock.FACING));

@@ -3,8 +3,8 @@
   "id": "mechanical-factory",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Mechanical Factory",
+  "description": "A factory mod that can run on server-side, with a vanilla client side",
   "authors": [
     "Me!"
   ],
@@ -13,7 +13,7 @@
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/mechanical-factory/icon.png",
 
   "environment": "*",
@@ -33,6 +33,6 @@
     "java": ">=16"
   },
   "suggests": {
-    "another-mod": "*"
+
   }
 }

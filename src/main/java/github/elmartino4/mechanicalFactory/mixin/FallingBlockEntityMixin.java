@@ -1,5 +1,6 @@
 package github.elmartino4.mechanicalFactory.mixin;
 
+import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -52,7 +53,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
             lastBroken = 0;
         }
 
-        if (block.isOf(Blocks.ANVIL))
+        if (block.getBlock() instanceof AnvilBlock)
         {
 
             BlockPos pos = getBlockPos();
@@ -64,7 +65,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
                             RaycastContext.FluidHandling.SOURCE_ONLY, this
                     )).getBlockPos().down();
 
-            if(world.getBlockState(new BlockPos(this.getX(), this.getY() + getVelocity().y + 0.04, this.getZ())).getBlock() != Blocks.AIR){
+            if(world.getBlockState(new BlockPos(this.getX(), this.getY() + getVelocity().y - 0.04, this.getZ())).getBlock() != Blocks.AIR){
                 onCollision(hit);
             }
         }
@@ -108,7 +109,7 @@ public abstract class FallingBlockEntityMixin extends Entity {
                     }
 
                     //System.out.println("i = " + i + ", j = " + (i + changeBlocks.size()));
-                    lastBroken = i - changeBlocks.size();
+                    lastBroken = i - changeBlocks.size() + 3;
                 }
             }
     }

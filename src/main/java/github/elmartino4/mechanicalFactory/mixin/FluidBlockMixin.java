@@ -42,10 +42,10 @@ public class FluidBlockMixin {
         int matchVal = 1;
         int matchIndex = -1;
 
+        Fluid primary = world.getFluidState(pos).getFluid();
+
         for (UnmodifiableIterator<Direction> unmodifiableIterator = field_34006.iterator(); unmodifiableIterator.hasNext(); ) {
             BlockPos iteratedPos = pos.offset(unmodifiableIterator.next().getOpposite());
-
-            Fluid primary = world.getFluidState(pos).getFluid();
 
             Fluid secondaryFluid = world.getFluidState(iteratedPos).getFluid();
 
@@ -70,7 +70,7 @@ public class FluidBlockMixin {
             if(out.equals(Blocks.FROSTED_ICE.getDefaultState()))
                 world.getBlockTickScheduler().schedule(pos, Blocks.FROSTED_ICE, 50);
 
-            if (world.getFluidState(pos).isIn((Tag)FluidTags.LAVA)) world.syncWorldEvent(WorldEvents.LAVA_EXTINGUISHED, pos, 0);
+            if (primary == Fluids.LAVA || primary == Fluids.FLOWING_LAVA) world.syncWorldEvent(WorldEvents.LAVA_EXTINGUISHED, pos, 0);
             cir.setReturnValue(false);
             //System.out.println("found a match");
         }

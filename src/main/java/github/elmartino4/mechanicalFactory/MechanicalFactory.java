@@ -40,6 +40,7 @@ public class MechanicalFactory implements ModInitializer {
 	private static void initAnvilMap(){
 		anvilMap.put(Arrays.asList(Blocks.STONE), Arrays.asList(Blocks.COBBLESTONE));
 		anvilMap.put(Arrays.asList(Blocks.COBBLESTONE), Arrays.asList(Blocks.GRAVEL));
+		anvilMap.put(Arrays.asList(Blocks.MOSSY_COBBLESTONE), Arrays.asList(Blocks.GRAVEL));
 		anvilMap.put(Arrays.asList(Blocks.SANDSTONE), Arrays.asList(Blocks.SAND));
 		anvilMap.put(Arrays.asList(Blocks.GRAVEL), Arrays.asList(Blocks.SAND));
 
@@ -71,6 +72,10 @@ public class MechanicalFactory implements ModInitializer {
 
 		anvilMap.put(Arrays.asList(Blocks.MOSSY_COBBLESTONE, Blocks.ICE), Arrays.asList(Blocks.PRISMARINE));
 		anvilMap.put(Arrays.asList(Blocks.ICE, Blocks.MOSSY_COBBLESTONE), Arrays.asList(Blocks.PRISMARINE));
+
+		anvilMap.put(Arrays.asList(Blocks.FROSTED_ICE, Blocks.FROSTED_ICE, Blocks.FROSTED_ICE), Arrays.asList(Blocks.ICE));
+		anvilMap.put(Arrays.asList(Blocks.ICE, Blocks.ICE, Blocks.ICE), Arrays.asList(Blocks.PACKED_ICE));
+		anvilMap.put(Arrays.asList(Blocks.PACKED_ICE, Blocks.PACKED_ICE, Blocks.PACKED_ICE), Arrays.asList(Blocks.BLUE_ICE));
 	}
 
 	private static void initGeneratorMap(){

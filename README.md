@@ -26,7 +26,7 @@ Features with :yellow_circle: are being implemented atm, features with :green_ci
 - mossy cobble + ice -> prismarine
 - prismarine -> water (with random tropical fish)
 
-### Seive :yellow_circle:
+### Seive :green_circle:
 works by dispensing *input* into a scaffolding, after 30 game ticks an item is dropped and the scaffolding is broken
 
 
@@ -46,5 +46,5 @@ works by dispensing *input* into a scaffolding, after 30 game ticks an item is d
 - dispenser with center popped chorus fruit uses one and places a block :green_circle:
 - piston with a netherwart block in front of it can push lava source blocks
 - piston with a wet sponge in front of it can push water source blocks
-- dispenser with bucket pointed into a full cauldron will remove its contents
+- dispenser with bucket pointed into a full cauldron will remove its contents :green_circle:
 - piston can push budding amethyst :green_circle:

@@ -44,16 +44,16 @@ public class EmptyBucketDispenserBehaviorMixin {
                 item2 = Items.WATER_BUCKET;
                 //level = ((Integer)world.getBlockState(outPos).get((Property)LeveledCauldronBlock.LEVEL)).intValue() == 3;
 
-                if(world.getBlockState(outPos).getProperties().contains((Property) LeveledCauldronBlock.LEVEL)){
+                //if(world.getBlockState(outPos).getProperties().contains((Property) LeveledCauldronBlock.LEVEL)){
 
-                }else{
-                    System.out.println("property not found");
-                }
+                //}else{
+                //    System.out.println("property not found");
+                //}
             }
 
             if(outBlockOld == Blocks.POWDER_SNOW_CAULDRON){
                 item2 = Items.POWDER_SNOW_BUCKET;
-                level = (Integer)world.getBlockState(outPos).get((Property) LeveledCauldronBlock.LEVEL) == 3;
+                //level = (Integer)world.getBlockState(outPos).get((Property) LeveledCauldronBlock.LEVEL) == 3;
             }
 
             if(item2 != null && level){
@@ -64,7 +64,7 @@ public class EmptyBucketDispenserBehaviorMixin {
                     world.emitGameEvent((Entity)null, GameEvent.FLUID_PICKUP, outPos);
                     if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(item2)) < 0) {
                         this.fallbackBehavior.dispense(pointer, new ItemStack(item2));
-                        cir.setReturnValue(new ItemStack(Items.LAVA_BUCKET));
+                        cir.setReturnValue(stack);
                     }
                 }
             }

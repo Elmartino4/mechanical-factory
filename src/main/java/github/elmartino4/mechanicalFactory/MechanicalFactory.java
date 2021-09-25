@@ -8,14 +8,10 @@ import github.elmartino4.mechanicalFactory.util.SieveIdentifier;
 import github.elmartino4.mechanicalFactory.util.WeatheringMap;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
 
 import java.util.*;
 
@@ -27,7 +23,6 @@ public class MechanicalFactory implements ModInitializer {
 	public static WeatheringMap weatheringMap = new WeatheringMap();
 
 	public static HashMap<Item, SieveIdentifier> sieveMap = new HashMap<>();
-	public static int sieveTimer = 40;
 
 	@Override
 	public void onInitialize() {
@@ -111,7 +106,7 @@ public class MechanicalFactory implements ModInitializer {
 	}
 
 	private static void initSieveMap(){
-		SieveIdentifier temp = new SieveIdentifier(25);
+		SieveIdentifier temp = new SieveIdentifier(25, 70);
 
 		temp.put(10, 1, 2, Items.PURPUR_BLOCK);
 		temp.put(20, 1, 5, Items.CHORUS_FRUIT);
@@ -122,7 +117,7 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.END_STONE, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(6);
+		temp = new SieveIdentifier(6, 70);
 
 		temp.put(3, 1, 3, Items.QUARTZ);
 		temp.put(3, 2, 6, Items.GOLD_NUGGET);
@@ -132,7 +127,7 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.NETHERRACK, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(8);
+		temp = new SieveIdentifier(8, 40);
 
 		temp.put(4, 1, 1, Items.CRIMSON_FUNGUS);
 		temp.put(4, 1, 1, Items.WARPED_FUNGUS);
@@ -142,7 +137,7 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.SOUL_SAND, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(12);
+		temp = new SieveIdentifier(12, 50);
 
 		temp.put(8, 2, 3, Items.WHEAT_SEEDS);
 		temp.put(5, 2, 3, Items.BEETROOT_SEEDS);
@@ -155,7 +150,7 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.DIRT, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(12);
+		temp = new SieveIdentifier(12, 40);
 
 		temp.put(14, 1, 1, Items.SAND);
 		temp.put(3, 1, 1, Items.REDSTONE);
@@ -167,7 +162,7 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.RED_SAND, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(28);
+		temp = new SieveIdentifier(28, 40);
 
 		temp.put(8, 2, 3, Items.CLAY_BALL);
 		temp.put(3, 1, 3, Items.QUARTZ);
@@ -179,7 +174,7 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.SAND, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(2);
+		temp = new SieveIdentifier(2, 50);
 
 		temp.put(10, 1, 1, Items.DIRT);
 		temp.put(2, 1, 3, Items.OAK_SAPLING);
@@ -194,7 +189,7 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.GRASS_BLOCK, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(22);
+		temp = new SieveIdentifier(22, 45);
 
 		temp.put(20, 1, 2, Items.FLINT);
 		temp.put(2, 4, 8, Items.FLINT);
@@ -206,7 +201,7 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.GRAVEL, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(5);
+		temp = new SieveIdentifier(5, 70);
 
 		temp.put(3, 3, 7, Items.RAW_IRON);
 		temp.put(4, 1, 1, Items.STONE);
@@ -215,15 +210,15 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.TUFF, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(6);
+		temp = new SieveIdentifier(6, 70);
 
 		temp.put(5, 3, 8, Items.RAW_COPPER);
 		temp.put(6, 1, 1, Items.STONE);
 
-		sieveMap.put(Items.TUFF, temp.clone());
+		sieveMap.put(Items.GRANITE, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(8);
+		temp = new SieveIdentifier(8, 70);
 
 		temp.put(3, 1, 4, Items.PRISMARINE_SHARD);
 		temp.put(3, 1, 4, Items.PRISMARINE_CRYSTALS);
@@ -236,7 +231,7 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.PRISMARINE, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(36);
+		temp = new SieveIdentifier(36, 35);
 
 		temp.put(6, 1, 2, Items.EMERALD);
 		temp.put(9, 3, 4, Items.RAW_COPPER);
@@ -247,7 +242,7 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.CLAY, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(3);
+		temp = new SieveIdentifier(3, 70);
 
 		temp.put(15, 2, 5, Items.CLAY_BALL);
 		temp.put(3, 6, 12, Items.CLAY_BALL);

@@ -10,19 +10,26 @@ import java.util.Random;
 
 public class SieveIdentifier {
     int defaultWeighing;
+    int delayTicks;
     ArrayList<OutItemData> data = new ArrayList<>();
 
-    public SieveIdentifier(int defaultWeighing){
+    public SieveIdentifier(int defaultWeighing, int delayTicks){
+        this.delayTicks = delayTicks;
         this.defaultWeighing = defaultWeighing;
     }
 
-    protected SieveIdentifier(int defaultWeighing, ArrayList<OutItemData> data){
+    protected SieveIdentifier(int defaultWeighing, int delayTicks, ArrayList<OutItemData> data){
         this.defaultWeighing = defaultWeighing;
+        this.delayTicks = delayTicks;
         this.data = data;
     }
 
     public SieveIdentifier clone(){
-        return new SieveIdentifier(this.defaultWeighing, this.data);
+        return new SieveIdentifier(this.defaultWeighing, this.delayTicks, this.data);
+    }
+
+    public int getDelay(){
+        return this.delayTicks;
     }
 
     public void empty(int defaultWeighing){

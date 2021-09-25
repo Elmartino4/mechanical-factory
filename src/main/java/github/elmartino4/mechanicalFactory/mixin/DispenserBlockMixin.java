@@ -2,6 +2,7 @@ package github.elmartino4.mechanicalFactory.mixin;
 
 import github.elmartino4.mechanicalFactory.MechanicalFactory;
 import github.elmartino4.mechanicalFactory.util.DispenserBlockEntityAccess;
+import github.elmartino4.mechanicalFactory.util.SieveIdentifier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -109,16 +110,20 @@ public abstract class DispenserBlockMixin {
 
             //System.out.println("cancelled partly +1");
 
-            if(!MechanicalFactory.sieveMap.containsKey(itm)){
+            SieveIdentifier id = MechanicalFactory.sieveMap.get(itm);
+
+            if(id == null){
                 ((DispenserBlockEntityAccess)ent).setItem(null);
                 ((DispenserBlockEntityAccess)ent).setItemIndex(slot);
                 //System.out.println("stopped cancel because of " + itm.getTranslationKey());
                 return;
             }
 
-            //System.out.println("cancelled partly +2");
+            int delay = id.getDelay();
 
-            world.getBlockTickScheduler().schedule(pos, Blocks.DROPPER, MechanicalFactory.sieveTimer);
+            System.out.println("cancelled partly for " + delay);
+
+            world.getBlockTickScheduler().schedule(pos, Blocks.DROPPER, delay);
             world.setBlockState(pos, (BlockState)state.with((Property) Properties.TRIGGERED, true), Block.NO_REDRAW);
 
             ent.removeStack(slot, 1);
@@ -127,7 +132,7 @@ public abstract class DispenserBlockMixin {
 
             BlockPos pos2 = pos.offset(direc);
             ItemEntity itmEnt = new ItemEntity(world, pos2.getX() + 0.5, pos2.getY() + 0.2, pos2.getZ() + 0.5, new ItemStack(itm, 1));
-            ((ItemEntityAccessor) itmEnt).setItemAge(6000 - MechanicalFactory.sieveTimer);
+            ((ItemEntityAccessor) itmEnt).setItemAge(6000 - delay);
             itmEnt.setNoGravity(true);
             itmEnt.setPickupDelayInfinite();
             itmEnt.setVelocity(0, 0, 0);

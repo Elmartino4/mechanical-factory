@@ -21,14 +21,15 @@ Features with :yellow_circle: are being implemented atm, features with :green_ci
 - stone + redsand -> granite
 - concrete -> concrete powder :yellow_circle:
 - netherrack + soul soil -> soul sand + soul soil
-- netherrack + flowing lava -> magma block :yellow_circle:
-- sand + lava source -> redsand :yellow_circle:
+- netherrack + flowing lava -> magma block 
+- sand + lava source -> redsand 
+- sand + flowing water -> clay block
 - mossy cobble + ice -> prismarine
-- prismarine -> water (with random tropical fish)
 
 ### Seive :green_circle:
-works by dispensing *input* into a scaffolding, after 30 game ticks an item is dropped and the scaffolding is broken
+works by dispensing an input into a scaffolding, after 2 seconds an item is dropped and the scaffolding is broken
 
+further details at [this page](https://github.com/Elmartino4/mechanical-factory/blob/1.17/Item_Chances.md)
 
 ### Generator :green_circle:
 - water + blue ice -> frosted ice

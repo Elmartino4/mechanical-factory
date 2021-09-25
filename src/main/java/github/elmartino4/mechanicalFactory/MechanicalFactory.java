@@ -1,6 +1,7 @@
 package github.elmartino4.mechanicalFactory;
 
 import github.elmartino4.mechanicalFactory.config.ModConfig;
+import github.elmartino4.mechanicalFactory.util.BlockOrFluid;
 import github.elmartino4.mechanicalFactory.util.GeneratorIdentifier;
 import github.elmartino4.mechanicalFactory.util.SieveIdentifier;
 
@@ -20,6 +21,8 @@ import java.util.*;
 
 public class MechanicalFactory implements ModInitializer {
 	public static HashMap<List<Block>, List<Block>> anvilMap = new HashMap<>();
+	public static HashMap<List<BlockOrFluid>, List<Block>> specialAnvilMap = new HashMap<>();
+
 	public static ArrayList<GeneratorIdentifier> generatorMap = new ArrayList<>();
 	public static WeatheringMap weatheringMap = new WeatheringMap();
 
@@ -76,6 +79,13 @@ public class MechanicalFactory implements ModInitializer {
 		anvilMap.put(Arrays.asList(Blocks.FROSTED_ICE, Blocks.FROSTED_ICE, Blocks.FROSTED_ICE), Arrays.asList(Blocks.ICE));
 		anvilMap.put(Arrays.asList(Blocks.ICE, Blocks.ICE, Blocks.ICE), Arrays.asList(Blocks.PACKED_ICE));
 		anvilMap.put(Arrays.asList(Blocks.PACKED_ICE, Blocks.PACKED_ICE, Blocks.PACKED_ICE), Arrays.asList(Blocks.BLUE_ICE));
+
+		specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.NETHERRACK)), Arrays.asList(Blocks.MAGMA_BLOCK));
+		specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.LAVA), new BlockOrFluid(Blocks.SAND)), Arrays.asList(Blocks.RED_SAND));
+		specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_WATER), new BlockOrFluid(Blocks.CLAY)), Arrays.asList(Blocks.CLAY));
+
+		List<BlockOrFluid> list = Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.NETHERRACK));
+		System.out.println(list + " @ " + list.hashCode());
 	}
 
 	private static void initGeneratorMap(){

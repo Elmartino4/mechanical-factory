@@ -1,5 +1,6 @@
 package github.elmartino4.mechanicalFactory.mixin;
 
+import github.elmartino4.mechanicalFactory.util.BlockOrFluid;
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -8,6 +9,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FallingBlockEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.network.MessageType;
@@ -82,9 +85,20 @@ public abstract class FallingBlockEntityMixin extends Entity {
         if(lastBroken == 0)
             for (int i = 3; i > 0 && !match; i--) {
                 List<Block> blockList = new ArrayList<>();
+                List<BlockOrFluid> blockOrFluidList = new ArrayList<>();
+
+                Fluid temp = world.getFluidState(hit.up(1)).getFluid();
+                if(temp != Fluids.EMPTY)
+                    blockOrFluidList.add(new BlockOrFluid(temp));
 
                 for (int j = 0; j < i; j++) {
-                    blockList.add(world.getBlockState(hit.down(j)).getBlock());
+                    Block next = world.getBlockState(hit.down(j)).getBlock();
+                    blockList.add(next);
+                    if(next == Blocks.AIR){
+                        blockOrFluidList.add(new BlockOrFluid(world.getFluidState(hit.down(j)).getFluid()));
+                    }else{
+                        blockOrFluidList.add(new BlockOrFluid(next));
+                    }
                 }
 
                 //System.out.println(blockList.toString());
@@ -94,7 +108,11 @@ public abstract class FallingBlockEntityMixin extends Entity {
 
                 match = changeBlocks != null;//!changeBlocks.isEmpty();
 
-                //System.out.println("match = " + match);
+                if(!match){
+                    changeBlocks = MechanicalFactory.specialAnvilMap.get(blockOrFluidList);
+                    //System.out.println("checked map at " + blockOrFluidList.toString() + " @ " + blockOrFluidList.hashCode() + " and found " + (changeBlocks != null));
+                    match = changeBlocks != null;
+                }
 
                 if(match){
 

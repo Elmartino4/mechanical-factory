@@ -167,19 +167,21 @@ public class MechanicalFactory implements ModInitializer {
 		sieveMap.put(Items.RED_SAND, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(18);
+		temp = new SieveIdentifier(28);
 
-		temp.put(6, 2, 3, Items.CLAY_BALL);
+		temp.put(8, 2, 3, Items.CLAY_BALL);
 		temp.put(3, 1, 3, Items.QUARTZ);
 		temp.put(2, 2, 3, Items.RAW_IRON);
 		temp.put(3, 2, 3, Items.RAW_COPPER);
 		temp.put(12, 1, 2, Items.CACTUS);
+		temp.put(14, 1, 1, Items.COARSE_DIRT);
 
 		sieveMap.put(Items.SAND, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(8);
+		temp = new SieveIdentifier(2);
 
+		temp.put(10, 1, 1, Items.DIRT);
 		temp.put(2, 1, 3, Items.OAK_SAPLING);
 		temp.put(2, 1, 2, Items.SPRUCE_SAPLING);
 		temp.put(2, 1, 2, Items.BIRCH_SAPLING);
@@ -187,17 +189,19 @@ public class MechanicalFactory implements ModInitializer {
 		temp.put(1, 1, 1, Items.JUNGLE_SAPLING);
 		temp.put(3, 2, 4, Items.PUMPKIN_SEEDS);
 		temp.put(3, 2, 4, Items.MELON_SLICE);
+		temp.put(4, 1, 2, Items.SUGAR_CANE);
 
 		sieveMap.put(Items.GRASS_BLOCK, temp.clone());
 
 		//------------------------------------------------------------------------------------------------------
-		temp = new SieveIdentifier(12);
+		temp = new SieveIdentifier(22);
 
-		temp.put(12, 1, 4, Items.FLINT);
-		temp.put(6, 2, 3, Items.COAL);
-		temp.put(2, 1, 3, Items.RAW_IRON);
-		temp.put(2, 1, 2, Items.RAW_GOLD);
-		temp.put(3, 2, 3, Items.RAW_COPPER);
+		temp.put(20, 1, 2, Items.FLINT);
+		temp.put(2, 4, 8, Items.FLINT);
+		temp.put(8, 1, 4, Items.COAL);
+		temp.put(2, 5, 12, Items.COAL);
+		temp.put(2, 2, 4, Items.RAW_IRON);
+		temp.put(1, 2, 4, Items.RAW_GOLD);
 
 		sieveMap.put(Items.GRAVEL, temp.clone());
 
@@ -230,5 +234,25 @@ public class MechanicalFactory implements ModInitializer {
 		temp.put(3, 2, 4, Items.PUFFERFISH);
 
 		sieveMap.put(Items.PRISMARINE, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(36);
+
+		temp.put(6, 1, 2, Items.EMERALD);
+		temp.put(9, 3, 4, Items.RAW_COPPER);
+		temp.put(6, 2, 3, Items.RAW_GOLD);
+		temp.put(1, 5, 8, Items.RAW_GOLD);
+		temp.put(9, 3, 4, Items.RAW_IRON);
+
+		sieveMap.put(Items.CLAY, temp.clone());
+
+		//------------------------------------------------------------------------------------------------------
+		temp = new SieveIdentifier(3);
+
+		temp.put(15, 2, 5, Items.CLAY_BALL);
+		temp.put(3, 6, 12, Items.CLAY_BALL);
+		temp.put(6, 1, 1, Items.COARSE_DIRT);
+
+		sieveMap.put(Items.TERRACOTTA, temp.clone());
 	}
 }

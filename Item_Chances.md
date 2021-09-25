@@ -39,8 +39,8 @@
 - quartz - 3 (1-3)
 - raw iron - 2 (2-3)
 - raw copper - 3 (2-3)
-- cactus - 16 (1-2)
-- dirt - 12 (1)
+- cactus - 12 (1-2)
+- coarse dirt - 14 (1)
 
 ## grass block 2 ->
 - dirt - 10 (1)
@@ -54,7 +54,8 @@
 - sugar cane - 4 (1-2)
 
 ## gravel 22 ->
-- flint - 20 (3-8)
+- flint - 20 (1-2)
+- flint - 2 (4-8)
 - coal - 8 (2-4)
 - coal - 2 (5-12)
 - raw iron - 2 (2-4)
@@ -63,10 +64,11 @@
 ## tuff 4 ->
 - raw iron - 3 (3-7)
 - stone - 4 (1)
+- deepslate - 1 (1)
 
-## granite 5 ->
-- raw copper - 4 (3-7)
-- stone - 4 (1)
+## granite 6 ->
+- raw copper - 5 (3-8)
+- stone - 6 (1)
 
 ## prismarine 12 ->
 - prismarine shard - 3 (1-4)
@@ -87,3 +89,4 @@
 ## terracotta 3 ->
 - clay balls - 15 (2-5)
 - clay balls - 3 (6-12)
+- coarse dirt - 6 (1)

@@ -1,9 +1,10 @@
 ## endstone (25) ->
-- purpur (10, [1-2])
-- chorus fruit (20, [1-5])
-- popped chorus fruit (15, [1-5])
-- shulker shell (1, [1-3])
-- phantom membrane (2, [2])
+- purpur 10 - (1-2)
+- chorus plant - 3 (1)
+- chorus fruit 20, (1-5)
+- popped chorus fruit 15 - (1-5)
+- shulker shell 1 - (1-3)
+- phantom membrane 2 - (2)
 
 ## netherack 6 ->
 - quartz - 3 (1-3)
@@ -79,7 +80,9 @@
 - pufferfish - 3 (2-4)
 - tropicalfish - 4 (3-4)
 
-## clay 36 ->
+## clay 16 ->
+- gravel - 10 (1)
+- flint - 14 (1-3)
 - emerald - 6 (1-2)
 - raw copper - 9 (3-4)
 - raw gold - 6 (2-3)
@@ -90,3 +93,10 @@
 - clay balls - 15 (2-5)
 - clay balls - 3 (6-12)
 - coarse dirt - 6 (1)
+
+## flint 8 ->
+- iron nugget - 8 (2-5)
+- iron nugget - 3 (7-12)
+- iron nugget - 1 (14-30)
+- coal - 10 (1-3)
+- coal - 4 (4-6)

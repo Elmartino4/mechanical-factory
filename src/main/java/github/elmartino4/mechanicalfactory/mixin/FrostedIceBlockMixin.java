@@ -1,4 +1,4 @@
-package github.elmartino4.mechanicalFactory.mixin;
+package github.elmartino4.mechanicalfactory.mixin;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

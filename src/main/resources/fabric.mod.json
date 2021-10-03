@@ -6,11 +6,11 @@
   "name": "Mechanical Factory",
   "description": "A factory mod that can run on server-side, with a vanilla client side",
   "authors": [
-    "Me!"
+    "Elmartino4"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/Elmartino4/mechanical-factory",
+    "sources": "https://github.com/Elmartino4/mechanical-factory"
   },
 
   "license": "MIT",
@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "github.elmartino4.mechanicalFactory.MechanicalFactory"
+      "github.elmartino4.mechanicalfactory.MechanicalFactory"
     ]
   },
   "mixins": [

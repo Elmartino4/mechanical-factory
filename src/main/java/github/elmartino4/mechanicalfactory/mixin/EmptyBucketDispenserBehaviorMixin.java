@@ -1,4 +1,4 @@
-package github.elmartino4.mechanicalFactory.mixin;
+package github.elmartino4.mechanicalfactory.mixin;
 
 import net.minecraft.block.*;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -7,13 +7,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.state.property.Property;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

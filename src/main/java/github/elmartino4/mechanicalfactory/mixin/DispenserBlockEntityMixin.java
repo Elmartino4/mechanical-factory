@@ -1,6 +1,6 @@
-package github.elmartino4.mechanicalFactory.mixin;
+package github.elmartino4.mechanicalfactory.mixin;
 
-import github.elmartino4.mechanicalFactory.util.DispenserBlockEntityAccess;
+import github.elmartino4.mechanicalfactory.util.DispenserBlockEntityAccess;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.item.Item;
 import org.spongepowered.asm.mixin.Mixin;
@@ -11,6 +11,8 @@ public class DispenserBlockEntityMixin implements DispenserBlockEntityAccess {
     @Unique Item takenItem;
 
     @Unique int itemIndex;
+
+    @Unique int breakProgress;
 
     @Override
     public void setItem(Item itm) {
@@ -30,5 +32,15 @@ public class DispenserBlockEntityMixin implements DispenserBlockEntityAccess {
     @Override
     public int getItemIndex() {
         return itemIndex;
+    }
+
+    @Override
+    public int getAndIterateBreakProgress(){
+        return breakProgress++;
+    }
+
+    @Override
+    public void setBreakProgressNone(){
+        breakProgress = 0;
     }
 }

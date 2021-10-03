@@ -1,11 +1,9 @@
-package github.elmartino4.mechanicalFactory.util;
+package github.elmartino4.mechanicalfactory.util;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class SieveIdentifier {

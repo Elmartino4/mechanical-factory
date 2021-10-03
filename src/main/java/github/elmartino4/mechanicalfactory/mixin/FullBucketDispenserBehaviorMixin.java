@@ -1,10 +1,8 @@
-package github.elmartino4.mechanicalFactory.mixin;
+package github.elmartino4.mechanicalfactory.mixin;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.LeveledCauldronBlock;
-import net.minecraft.block.dispenser.DispenserBehavior;
-import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;

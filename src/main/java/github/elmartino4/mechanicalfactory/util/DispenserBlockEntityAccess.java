@@ -1,7 +1,6 @@
-package github.elmartino4.mechanicalFactory.util;
+package github.elmartino4.mechanicalfactory.util;
 
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public interface DispenserBlockEntityAccess {
     void setItem(Item itm);
@@ -11,4 +10,8 @@ public interface DispenserBlockEntityAccess {
     void setItemIndex(int itm);
 
     int getItemIndex();
+
+    int getAndIterateBreakProgress();
+
+    void setBreakProgressNone();
 }

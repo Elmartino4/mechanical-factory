@@ -1,10 +1,7 @@
-package github.elmartino4.mechanicalFactory.util;
+package github.elmartino4.mechanicalfactory.util;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.tag.Tag;
 
 public class GeneratorIdentifier {
     Fluid primary;

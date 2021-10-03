@@ -1,17 +1,19 @@
-package github.elmartino4.mechanicalFactory;
+package github.elmartino4.mechanicalfactory;
 
-import github.elmartino4.mechanicalFactory.config.ModConfig;
-import github.elmartino4.mechanicalFactory.util.BlockOrFluid;
-import github.elmartino4.mechanicalFactory.util.GeneratorIdentifier;
-import github.elmartino4.mechanicalFactory.util.SieveIdentifier;
+import github.elmartino4.mechanicalfactory.config.ModConfig;
+import github.elmartino4.mechanicalfactory.util.BlockOrFluid;
+import github.elmartino4.mechanicalfactory.util.GeneratorIdentifier;
+import github.elmartino4.mechanicalfactory.util.SieveIdentifier;
 
-import github.elmartino4.mechanicalFactory.util.WeatheringMap;
+import github.elmartino4.mechanicalfactory.util.WeatheringMap;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
@@ -24,9 +26,11 @@ public class MechanicalFactory implements ModInitializer {
 
 	public static HashMap<Item, SieveIdentifier> sieveMap = new HashMap<>();
 
+	public static final Logger LOGGER = LogManager.getLogger("Mechanical Factory");
+
 	@Override
 	public void onInitialize() {
-		System.out.println("Loaded Mechanical Factory");
+		LOGGER.info("Loaded Mechanical Factory");
 		ModConfig.init();
 
 		initAnvilMap();
@@ -80,7 +84,7 @@ public class MechanicalFactory implements ModInitializer {
 		specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_WATER), new BlockOrFluid(Blocks.CLAY)), Arrays.asList(Blocks.CLAY));
 
 		List<BlockOrFluid> list = Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.NETHERRACK));
-		System.out.println(list + " @ " + list.hashCode());
+		//System.out.println(list + " @ " + list.hashCode());
 	}
 
 	private static void initGeneratorMap(){

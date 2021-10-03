@@ -1,15 +1,12 @@
-package github.elmartino4.mechanicalFactory.mixin;
+package github.elmartino4.mechanicalfactory.mixin;
 
-import github.elmartino4.mechanicalFactory.MechanicalFactory;
-import github.elmartino4.mechanicalFactory.util.SieveIdentifier;
+import github.elmartino4.mechanicalfactory.MechanicalFactory;
+import github.elmartino4.mechanicalfactory.util.SieveIdentifier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -18,10 +15,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @Mixin(ItemDispenserBehavior.class)

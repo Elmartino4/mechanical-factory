@@ -1,8 +1,7 @@
-package github.elmartino4.mechanicalFactory.mixin;
+package github.elmartino4.mechanicalfactory.mixin;
 
-import github.elmartino4.mechanicalFactory.MechanicalFactory;
+import github.elmartino4.mechanicalfactory.MechanicalFactory;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;

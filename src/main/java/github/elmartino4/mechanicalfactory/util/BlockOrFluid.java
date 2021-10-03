@@ -1,4 +1,4 @@
-package github.elmartino4.mechanicalFactory.util;
+package github.elmartino4.mechanicalfactory.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
@@ -22,7 +22,7 @@ public class BlockOrFluid {
     @Override
     public boolean equals(Object o) {
         if (this == o){
-            System.out.println("equal");
+            //System.out.println("equal");
             return true;
         }
         //if (o == null || getClass() != o.getClass()) return false;

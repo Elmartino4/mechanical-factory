@@ -43,9 +43,9 @@ further details at [this page](https://github.com/Elmartino4/mechanical-factory/
 - log + lava -> block of coal (small probability)
 
 ### Other features
-- dispenser with endrod in front breaks blocks it points at (requires a continuous redstone signal)
+- dispenser with a diamond tool in the centre attempts to break the block infront :green_circle:
 - dispenser with center popped chorus fruit uses one and places a block :green_circle:
-- piston with a netherwart block in front of it can push lava source blocks
-- piston with a wet sponge in front of it can push water source blocks
 - dispenser with bucket pointed into a full cauldron will remove its contents :green_circle:
 - piston can push budding amethyst :green_circle:
+- piston with a netherwart block in front of it can push lava source blocks
+- piston with a wet sponge in front of it can push water source blocks

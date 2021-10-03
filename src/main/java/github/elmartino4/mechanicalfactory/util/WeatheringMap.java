@@ -1,4 +1,4 @@
-package github.elmartino4.mechanicalFactory.util;
+package github.elmartino4.mechanicalfactory.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

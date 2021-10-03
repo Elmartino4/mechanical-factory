@@ -1,6 +1,6 @@
-package github.elmartino4.mechanicalFactory.mixin;
+package github.elmartino4.mechanicalfactory.mixin;
 
-import github.elmartino4.mechanicalFactory.util.DispenserBlockEntityAccess;
+import github.elmartino4.mechanicalfactory.util.DispenserBlockEntityAccess;
 import net.minecraft.block.DropperBlock;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.item.Item;

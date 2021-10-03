@@ -1,7 +1,5 @@
-package github.elmartino4.mechanicalFactory.config;
+package github.elmartino4.mechanicalfactory.config;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 

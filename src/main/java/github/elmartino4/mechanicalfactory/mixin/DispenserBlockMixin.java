@@ -1,8 +1,8 @@
-package github.elmartino4.mechanicalFactory.mixin;
+package github.elmartino4.mechanicalfactory.mixin;
 
-import github.elmartino4.mechanicalFactory.MechanicalFactory;
-import github.elmartino4.mechanicalFactory.util.DispenserBlockEntityAccess;
-import github.elmartino4.mechanicalFactory.util.SieveIdentifier;
+import github.elmartino4.mechanicalfactory.MechanicalFactory;
+import github.elmartino4.mechanicalfactory.util.DispenserBlockEntityAccess;
+import github.elmartino4.mechanicalfactory.util.SieveIdentifier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,24 +10,21 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.BlockPointerImpl;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import net.minecraft.world.event.GameEvent;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -47,12 +44,15 @@ public abstract class DispenserBlockMixin {
         BlockPointer pointer = (BlockPointer) new BlockPointerImpl((ServerWorld) world, pos);
         Direction direc = (Direction)pointer.getBlockState().get((Property)DispenserBlock.FACING);
 
+        BlockPos target = pos.offset(direc);
+
         if(world.getBlockState(pos).getBlock() == Blocks.DISPENSER){
             //System.out.println("called trigger");
 
             DispenserBlockEntity ent = (DispenserBlockEntity)world.getBlockEntity(pos);
 
-            if(ent.getStack(4).getItem() == Items.POPPED_CHORUS_FRUIT){
+            Item middleItem = ent.getStack(4).getItem();
+            if(middleItem == Items.POPPED_CHORUS_FRUIT){
 
                 int slot = ent.chooseNonEmptySlot();
                 for (int i = 0; i < 20 && slot == 4; i++) {
@@ -62,7 +62,7 @@ public abstract class DispenserBlockMixin {
                 Block toPlace = Block.getBlockFromItem(ent.getStack(slot).getItem());
 
                 if(slot != 4 && toPlace != Blocks.AIR){
-                    if(world.isAir(pos.offset(direc)) || toPlace == Blocks.DRAGON_EGG){
+                    if(world.isAir(target) || toPlace == Blocks.DRAGON_EGG){
 
                         world.playSound(null, pos.offset(direc),
                                 toPlace.getSoundGroup(toPlace.getDefaultState()).getPlaceSound(),
@@ -77,17 +77,77 @@ public abstract class DispenserBlockMixin {
                         return;
                     }
                 }
+            } else if(middleItem instanceof MiningToolItem){
+                if(((ToolItem)middleItem).getMaterial() == ToolMaterials.DIAMOND){
+                    DispenserBlockEntityAccess ent2 = (DispenserBlockEntityAccess) world.getBlockEntity(pos);
+                    BlockState toBreak = world.getBlockState(target);
+                    ItemStack toolStack = ent.getStack(4);
+
+                    float breakTime = getBreakTime(toBreak, toolStack, world, target);
+
+                    int progress = ent2.getAndIterateBreakProgress();
+
+
+                    if(breakTime * (progress * 1.5F + 1) >= 0.7F){
+                        ent2.setBreakProgressNone();
+                        //break the darn block
+                        //System.out.println("Break");
+                        world.breakBlock(pos.offset(direc), false);
+                        world.setBlockBreakingInfo(-1, pos.offset(direc), -1);
+
+                        LootContext.Builder lootContext = (new LootContext.Builder(world))
+                                .random(world.random).parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter((Vec3i)target))
+                                .parameter(LootContextParameters.TOOL, toolStack)
+                                .optionalParameter(LootContextParameters.BLOCK_ENTITY, world.getBlockEntity(target));
+
+                        toBreak.getDroppedStacks(lootContext).forEach((ItemStack stack) -> {Block.dropStack(world, target, stack);});
+
+                        if(toolStack.damage(1, new Random(), null)){
+                            ent.removeStack(4);
+                        }else{
+                            ent.setStack(4, toolStack);
+                        }
+
+                    }else{
+                        world.setBlockBreakingInfo(-1, target, (int)(breakTime * (progress * 1.5F + 1) * 10.0F));
+                    }
+
+                    ci.cancel();
+                    return;
+                }
             }
         }
     }
 
+    private static float getBreakTime(BlockState toBreak, ItemStack tool, World world, BlockPos breakPos){
+        float mult = tool.getMiningSpeedMultiplier(toBreak);
+
+        if(mult > 1.0F){
+            int eff = EnchantmentHelper.getLevel(Enchantments.EFFICIENCY, tool);
+            if(eff > 0){
+                mult += eff * eff + 1;
+            }
+        }
+
+        mult /= (!toBreak.isToolRequired() || tool.isSuitableFor(toBreak)) ? 30 : 100;
+        mult /= toBreak.getHardness(world, breakPos);
+
+        return mult;
+    }
+
     @Inject(method="neighborUpdate", at = @At("HEAD"), cancellable = true)
     private void injectUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify, CallbackInfo ci){
+
         boolean hasPower = world.isReceivingRedstonePower(pos) || world.isReceivingRedstonePower(pos.up());
         boolean isTriggered = (Boolean)state.get((Property) Properties.TRIGGERED);
 
         BlockPointer pointer = (BlockPointer) new BlockPointerImpl((ServerWorld) world, pos);
         Direction direc = (Direction)pointer.getBlockState().get((Property)DispenserBlock.FACING);
+
+        if(fromPos.equals(pos.offset(direc))){
+            ((DispenserBlockEntityAccess)world.getBlockEntity(pos)).setBreakProgressNone();
+            world.setBlockBreakingInfo(-1, pos.offset(direc), -1);
+        }
 
         if(world.getBlockTickScheduler().isScheduled(pos, Blocks.DROPPER) || world.getBlockTickScheduler().isScheduled(pos, Blocks.DISPENSER)){
             ci.cancel();
@@ -121,7 +181,7 @@ public abstract class DispenserBlockMixin {
 
             int delay = id.getDelay();
 
-            System.out.println("cancelled partly for " + delay);
+            //System.out.println("cancelled partly for " + delay);
 
             world.getBlockTickScheduler().schedule(pos, Blocks.DROPPER, delay);
             world.setBlockState(pos, (BlockState)state.with((Property) Properties.TRIGGERED, true), Block.NO_REDRAW);

@@ -2,16 +2,11 @@
 ## Description
 A factory style mod that uses mechanical processes to generate blocks items etc. All intended to work with vanilla clients.
 
-## Following features are planned:
-Features with :yellow_circle: are being implemented atm, features with :green_circle: are already implemented
-
-**TODO; MOVE THIS LIST TO GITHUB PROJECTS**
 
 ### Anvil :green_circle:
 - cobble -> gravel
 - gravel -> sand
 - sandstone -> sand
-- chisieled stone bricks -> stone bricks
 - stone -> cobblestone
 - cobblestone + gravel -> tuff
 - tuff + gravel -> deepslate
@@ -22,12 +17,12 @@ Features with :yellow_circle: are being implemented atm, features with :green_ci
 - concrete -> concrete powder :yellow_circle:
 - netherrack + soul soil -> soul sand + soul soil
 - netherrack + flowing lava -> magma block 
-- sand + lava source -> redsand 
+- sand + flowing source -> redsand 
 - sand + flowing water -> clay block
 - mossy cobble + ice -> prismarine
 
 ### Seive :green_circle:
-works by dispensing an input into a scaffolding, after 2 seconds an item is dropped and the scaffolding is broken
+works by dispensing an input into a scaffolding, after a specific amount of time an item is dropped and the scaffolding is broken
 
 further details at [this page](https://github.com/Elmartino4/mechanical-factory/blob/1.17/Item_Chances.md)
 
@@ -37,9 +32,8 @@ further details at [this page](https://github.com/Elmartino4/mechanical-factory/
 - blue ice + netherbrick + lava -> netherack
 
 ### Weathering :green_circle:
-- cobble -> mossycobble
-- stone bricks -> mossy stone bricks
-- copper -> exposed copper (and all other variants) :yellow_circle:
+- cobble + water -> mossycobble
+- stone bricks + water -> mossy stone bricks
 - log + lava -> block of coal (small probability)
 
 ### Other features

@@ -80,7 +80,7 @@ public class MechanicalFactory implements ModInitializer {
 		anvilMap.put(Arrays.asList(Blocks.PACKED_ICE, Blocks.PACKED_ICE, Blocks.PACKED_ICE), Arrays.asList(Blocks.BLUE_ICE));
 
 		specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.NETHERRACK)), Arrays.asList(Blocks.MAGMA_BLOCK));
-		specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.LAVA), new BlockOrFluid(Blocks.SAND)), Arrays.asList(Blocks.RED_SAND));
+		specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.SAND)), Arrays.asList(Blocks.RED_SAND));
 		specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_WATER), new BlockOrFluid(Blocks.SAND)), Arrays.asList(Blocks.CLAY));
 
 		List<BlockOrFluid> list = Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.NETHERRACK));

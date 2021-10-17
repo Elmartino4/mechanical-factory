@@ -16,7 +16,7 @@ import java.util.Random;
 public class WeatheringMap {
     private HashMap<WeatheringMapData, OutputData> map = new HashMap<>();
     private ArrayList<Block> list = new ArrayList<>();
-    private static final Direction[] dirList = {Direction.EAST, Direction.SOUTH, Direction.SOUTH, Direction.WEST};
+    private static final Direction[] dirList = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 
     public void put(Block main, Fluid secondary, Block becomes, float probability){
         map.put(new WeatheringMapData(main, secondary), new OutputData(becomes, probability));

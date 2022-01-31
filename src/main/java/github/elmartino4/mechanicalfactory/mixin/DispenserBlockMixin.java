@@ -149,7 +149,7 @@ public abstract class DispenserBlockMixin {
             world.setBlockBreakingInfo(-1, pos.offset(direc), -1);
         }
 
-        if(world.getBlockTickScheduler().isScheduled(pos, Blocks.DROPPER) || world.getBlockTickScheduler().isScheduled(pos, Blocks.DISPENSER)){
+        if(world.getBlockTickScheduler().isQueued(pos, Blocks.DROPPER) || world.getBlockTickScheduler().isQueued(pos, Blocks.DISPENSER)){
             ci.cancel();
             return;
         }
@@ -183,7 +183,7 @@ public abstract class DispenserBlockMixin {
 
             //System.out.println("cancelled partly for " + delay);
 
-            world.getBlockTickScheduler().schedule(pos, Blocks.DROPPER, delay);
+            world.createAndScheduleBlockTick(pos, Blocks.DROPPER, delay);
             world.setBlockState(pos, (BlockState)state.with((Property) Properties.TRIGGERED, true), Block.NO_REDRAW);
 
             ent.removeStack(slot, 1);

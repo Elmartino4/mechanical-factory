@@ -1,7 +1,6 @@
 package github.elmartino4.mechanicalfactory.mixin;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.UnmodifiableIterator;
 import github.elmartino4.mechanicalfactory.util.GeneratorIdentifier;
 import github.elmartino4.mechanicalfactory.MechanicalFactory;
 import net.minecraft.block.Block;
@@ -23,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FluidBlock.class)
 public class FluidBlockMixin {
-    @Final @Shadow static ImmutableList<Direction> field_34006;
+    @Final @Shadow public static ImmutableList<Direction> FLOW_DIRECTIONS;
 
     @Inject(method = "receiveNeighborFluids", at = @At("HEAD"), cancellable = true)
     private void receiveNeighbours(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir){
@@ -38,8 +37,8 @@ public class FluidBlockMixin {
 
         Fluid primary = world.getFluidState(pos).getFluid();
 
-        for (UnmodifiableIterator<Direction> unmodifiableIterator = field_34006.iterator(); unmodifiableIterator.hasNext(); ) {
-            BlockPos iteratedPos = pos.offset(unmodifiableIterator.next().getOpposite());
+        for (Direction direction : FLOW_DIRECTIONS) {
+            BlockPos iteratedPos = pos.offset(direction.getOpposite());
 
             Fluid secondaryFluid = world.getFluidState(iteratedPos).getFluid();
 
@@ -50,7 +49,7 @@ public class FluidBlockMixin {
             for (int i = 0; i < MechanicalFactory.generatorMap.size(); i++) {
                 GeneratorIdentifier gi = MechanicalFactory.generatorMap.get(i);
                 int tempMatchVal = gi.getSimilarity(primary, secondaryFluid, secondaryBlock, down);
-                if(tempMatchVal > matchVal){
+                if (tempMatchVal > matchVal) {
                     matchVal = tempMatchVal;
                     matchIndex = i;
                     //System.out.println("found a match");
@@ -62,7 +61,7 @@ public class FluidBlockMixin {
             BlockState out = MechanicalFactory.generatorMap.get(matchIndex).getBlockOut().getDefaultState();
             world.setBlockState(pos, out);
             if(out.equals(Blocks.FROSTED_ICE.getDefaultState()))
-                world.getBlockTickScheduler().schedule(pos, Blocks.FROSTED_ICE, 50);
+                world.createAndScheduleBlockTick(pos, Blocks.FROSTED_ICE, 50);
 
             if (primary == Fluids.LAVA || primary == Fluids.FLOWING_LAVA) world.syncWorldEvent(WorldEvents.LAVA_EXTINGUISHED, pos, 0);
             cir.setReturnValue(false);

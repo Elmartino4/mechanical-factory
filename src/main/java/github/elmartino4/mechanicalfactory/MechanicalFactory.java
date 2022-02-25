@@ -31,7 +31,7 @@ public class MechanicalFactory implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Loaded Mechanical Factory");
-		ModConfig.init();
+		//ModConfig.init();
 
 		initAnvilMap();
 		initGeneratorMap();

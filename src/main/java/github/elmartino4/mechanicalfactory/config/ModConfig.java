@@ -21,9 +21,9 @@ public class ModConfig {
 
     public static void init() {
         loadDefaults();
-        //generateFoldersAndFiles();
-        //readJson();
-        //writeJson(); //Write to file new config options
+        generateFoldersAndFiles();
+        readJson();
+        writeJson(); //Write to file new config options
     }
 
     public static void loadDefaults() {
@@ -35,7 +35,7 @@ public class ModConfig {
             folder.mkdir();
         }
         if (folder.isDirectory()) {
-            configFile = new File(folder, "high-level-enchants.json");
+            configFile = new File(folder, "mechafact.json");
             if (!configFile.exists()) {
                 try {
                     configFile.createNewFile();
@@ -48,7 +48,7 @@ public class ModConfig {
                     throw new IllegalStateException("Can't create config file", e);
                 }
             } else if (configFile.isDirectory()) {
-                throw new IllegalStateException("'high-level-enchants.json' must be a file!");
+                throw new IllegalStateException("'mechafact.json' must be a file!");
             } else {
             }
         } else {

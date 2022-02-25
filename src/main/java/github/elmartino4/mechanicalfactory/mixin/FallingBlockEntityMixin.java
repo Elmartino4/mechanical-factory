@@ -48,8 +48,6 @@ public abstract class FallingBlockEntityMixin extends Entity {
 
         if (block.getBlock() instanceof AnvilBlock)
         {
-
-            BlockPos pos = getBlockPos();
             BlockPos hit =
                     this.world.raycast(new RaycastContext(
                             new Vec3d(this.prevX, this.prevY, this.prevZ),
@@ -58,7 +56,8 @@ public abstract class FallingBlockEntityMixin extends Entity {
                             RaycastContext.FluidHandling.SOURCE_ONLY, this
                     )).getBlockPos().down();
 
-            if(world.getBlockState(new BlockPos(this.getX(), this.getY() + getVelocity().y - 0.04, this.getZ())).getBlock() != Blocks.AIR){
+            if(world.getBlockState(new BlockPos(this.getX(), this.getY() + getVelocity().y - 0.04, this.getZ())).getBlock() != Blocks.AIR &&
+                this.getVelocity().y < 0){
                 onCollision(hit);
             }
         }

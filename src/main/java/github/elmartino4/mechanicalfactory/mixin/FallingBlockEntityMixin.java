@@ -1,5 +1,6 @@
 package github.elmartino4.mechanicalfactory.mixin;
 
+import github.elmartino4.mechanicalfactory.config.ModConfig;
 import github.elmartino4.mechanicalfactory.util.BlockOrFluid;
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.Block;
@@ -93,12 +94,12 @@ public abstract class FallingBlockEntityMixin extends Entity {
                 //System.out.println(blockList.toString());
                 //System.out.println("map size = " + MechanicalFactory.anvilMap.size());
 
-                List<Block> changeBlocks = MechanicalFactory.anvilMap.get(blockList);
+                List<Block> changeBlocks = ModConfig.INSTANCE.anvilMap.get(blockList);
 
                 match = changeBlocks != null;//!changeBlocks.isEmpty();
 
                 if(!match){
-                    changeBlocks = MechanicalFactory.specialAnvilMap.get(blockOrFluidList);
+                    changeBlocks = ModConfig.INSTANCE.specialAnvilMap.get(blockOrFluidList);
                     //System.out.println("checked map at " + blockOrFluidList.toString() + " @ " + blockOrFluidList.hashCode() + " and found " + (changeBlocks != null));
                     match = changeBlocks != null;
                 }

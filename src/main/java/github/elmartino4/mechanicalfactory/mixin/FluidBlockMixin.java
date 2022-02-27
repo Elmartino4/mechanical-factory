@@ -1,6 +1,7 @@
 package github.elmartino4.mechanicalfactory.mixin;
 
 import com.google.common.collect.ImmutableList;
+import github.elmartino4.mechanicalfactory.config.ModConfig;
 import github.elmartino4.mechanicalfactory.util.GeneratorIdentifier;
 import github.elmartino4.mechanicalfactory.MechanicalFactory;
 import net.minecraft.block.Block;
@@ -46,8 +47,8 @@ public class FluidBlockMixin {
 
             //find best match
 
-            for (int i = 0; i < MechanicalFactory.generatorMap.size(); i++) {
-                GeneratorIdentifier gi = MechanicalFactory.generatorMap.get(i);
+            for (int i = 0; i < ModConfig.INSTANCE.generatorMap.size(); i++) {
+                GeneratorIdentifier gi = ModConfig.INSTANCE.generatorMap.get(i);
                 int tempMatchVal = gi.getSimilarity(primary, secondaryFluid, secondaryBlock, down);
                 if (tempMatchVal > matchVal) {
                     matchVal = tempMatchVal;
@@ -58,7 +59,7 @@ public class FluidBlockMixin {
         }
 
         if(matchIndex != -1){
-            BlockState out = MechanicalFactory.generatorMap.get(matchIndex).getBlockOut().getDefaultState();
+            BlockState out = ModConfig.INSTANCE.generatorMap.get(matchIndex).getBlockOut().getDefaultState();
             world.setBlockState(pos, out);
             if(out.equals(Blocks.FROSTED_ICE.getDefaultState()))
                 world.createAndScheduleBlockTick(pos, Blocks.FROSTED_ICE, 50);

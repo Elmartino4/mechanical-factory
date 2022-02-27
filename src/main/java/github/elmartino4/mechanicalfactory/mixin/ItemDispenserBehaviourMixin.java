@@ -1,6 +1,7 @@
 package github.elmartino4.mechanicalfactory.mixin;
 
 import github.elmartino4.mechanicalfactory.MechanicalFactory;
+import github.elmartino4.mechanicalfactory.config.ModConfig;
 import github.elmartino4.mechanicalfactory.util.SieveIdentifier;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -40,7 +41,7 @@ public class ItemDispenserBehaviourMixin {
 
         if(state.getBlock() == Blocks.SCAFFOLDING && world.getBlockState(pos).getBlock() == Blocks.DROPPER){
             //System.out.println("is Scaffolding");
-            SieveIdentifier id = MechanicalFactory.sieveMap.get(((ItemStack)args.get(1)).getItem());
+            SieveIdentifier id = ModConfig.INSTANCE.sieveMap.get(((ItemStack)args.get(1)).getItem());
             if(id != null){
                 ItemStack itm = id.selectItem(world.random);
                 //System.out.println("set Item " + ((itm != null) ? itm.getTranslationKey() : "null"));

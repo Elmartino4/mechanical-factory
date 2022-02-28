@@ -1,0 +1,11 @@
+[
+  {
+    "input": [
+      "minecraft:dirt",
+      "minecraft:soul_sand"
+    ],
+    "output": [
+      "minecraft:soul_soil"
+    ]
+  }
+]

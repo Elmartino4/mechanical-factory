@@ -3,9 +3,13 @@ package github.elmartino4.mechanicalfactory.config;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import com.google.gson.*;
 import github.elmartino4.mechanicalfactory.MechanicalFactory;
+import github.elmartino4.mechanicalfactory.util.BlockOrFluid;
 import github.elmartino4.mechanicalfactory.util.GeneratorIdentifier;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
@@ -97,25 +101,54 @@ public class ModConfig {
             JsonObject obj = elem.getAsJsonObject();
 
             if (type == ConfigType.anvil) {
-                /*if (obj.has("input")) {
+                List<Block> inputB = new ArrayList<>();;
+                List<BlockOrFluid> inputBorF = new ArrayList<>();;
+                List<Block> output = new ArrayList<>();
+
+                if (obj.has("input")) {
                     boolean containsFluids = false;
 
                     for (JsonElement inputElem : obj.get("input").getAsJsonArray()) {
-                        containsFluids = containsFluids || Registry.FLUID.containsId(new Identifier(inputElem.toString()));
+                        containsFluids = containsFluids || Registry.FLUID.containsId(new Identifier(inputElem.getAsString()));
                     }
 
                     if (containsFluids) {
-
+                        for (JsonElement inputElem : obj.get("input").getAsJsonArray()) {
+                            if (Registry.FLUID.containsId(new Identifier(inputElem.getAsString()))) {
+                                inputBorF.add(new BlockOrFluid(Registry.FLUID.get(new Identifier(inputElem.getAsString()))));
+                            } else if (Registry.BLOCK.containsId(new Identifier(inputElem.getAsString()))) {
+                                inputBorF.add(new BlockOrFluid(Registry.BLOCK.get(new Identifier(inputElem.getAsString()))));
+                            } else {
+                                MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, input is dodgy missing");
+                                continue;
+                            }
+                        }
                     } else {
-
-                    }
-                    for (JsonElement inputElem : obj.get("input").getAsJsonArray()) {
-
+                        for (JsonElement inputElem : obj.get("input").getAsJsonArray()) {
+                            inputB.add(Registry.BLOCK.get(new Identifier(inputElem.getAsString())));
+                        }
                     }
                 } else {
                     MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, input missing");
                     continue;
-                }*/
+                }
+
+                if (obj.has("output")) {
+                    for (JsonElement inputElem : obj.get("output").getAsJsonArray()) {
+                        output.add(Registry.BLOCK.get(new Identifier(inputElem.getAsString())));
+                    }
+                } else {
+                    MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, output missing");
+                    continue;
+                }
+
+                System.out.println("found anvil");
+
+                if (inputB.size() > 0) {
+                    INSTANCE.anvilMap.put(inputB, output);
+                } else {
+                    INSTANCE.specialAnvilMap.put(inputBorF, output);
+                }
             } else if (type == ConfigType.sieve) {
 
             } else if (type == ConfigType.weathering) {

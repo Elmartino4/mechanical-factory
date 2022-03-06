@@ -1,0 +1,36 @@
+[
+  {
+    "primary_fluid": "minecraft:flowing_water",
+    "secondary_block": "minecraft:blue_ice",
+    "output_block": "minecraft:frosted_ice"
+  },
+  {
+    "primary_fluid": "minecraft:water",
+    "secondary_block": "minecraft:blue_ice",
+    "output_block": "minecraft:ice"
+  },
+  {
+    "primary_fluid": "minecraft:flowing_lava",
+    "secondary_fluid": "minecraft:water",
+    "underneath_block": "minecraft:nether_bricks",
+    "output_block": "minecraft:netherrack"
+  },
+  {
+    "primary_fluid": "minecraft:flowing_lava",
+    "secondary_fluid": "minecraft:water",
+    "underneath_block": "minecraft:purpur_block",
+    "output_block": "minecraft:end_stone"
+  },
+  {
+    "primary_fluid": "minecraft:flowing_lava",
+    "secondary_fluid": "minecraft:flowing_water",
+    "underneath_block": "minecraft:nether_bricks",
+    "output_block": "minecraft:netherrack"
+  },
+  {
+    "primary_fluid": "minecraft:flowing_lava",
+    "secondary_fluid": "minecraft:flowing_water",
+    "underneath_block": "minecraft:purpur_block",
+    "output_block": "minecraft:end_stone"
+  }
+]

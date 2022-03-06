@@ -23,6 +23,13 @@ public class WeatheringMap {
         if(!list.contains(main)) list.add(main);
     }
 
+    public void combine(WeatheringMap otherMap) {
+        map.putAll(otherMap.map);
+        for (Block item : otherMap.list) {
+            if(!list.contains(item)) list.add(item);
+        }
+    }
+
     public boolean checkContains(Block main){
         return list.contains(main);
     }
@@ -67,6 +74,7 @@ public class WeatheringMap {
         @Override
         public boolean equals(Object o) {
             return this.hashCode() == o.hashCode();
+            // this is horrible and dumb; please fix
         }
 
         @Override

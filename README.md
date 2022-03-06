@@ -2,6 +2,27 @@
 ## Description
 A factory style mod that uses mechanical processes to generate blocks items etc. All intended to work with vanilla clients.
 
+## Data driven _recipes_
+Put a .json folder with any name into a datapack within the folders anvil, generator, sieve, or weathering.
+Call the json file "default(-optionaltext).json" to overwrite the original recipes.
+Files named "original(-optionaltext).json" can be overwritten by default files.
+
+### Anvil recipes
+```json
+[
+  {
+    "input": [
+      "minecraft:input_block_one",
+      "modid:input_block_two",
+      "anothermodid:input_block_there"
+    ],
+    "ouput": [
+      "minecraft:output_block_one",
+      "modid:output_block_two"
+    ]
+  }
+]
+```
 
 ### Anvil :green_circle:
 - cobble -> gravel

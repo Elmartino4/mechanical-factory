@@ -11,22 +11,30 @@ import com.google.gson.*;
 import github.elmartino4.mechanicalfactory.MechanicalFactory;
 import github.elmartino4.mechanicalfactory.util.BlockOrFluid;
 import github.elmartino4.mechanicalfactory.util.GeneratorIdentifier;
+import github.elmartino4.mechanicalfactory.util.SieveIdentifier;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.item.Item;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.apache.commons.io.IOUtils;
 
-public class ModConfig {
+// TODO:
+/*
+ * add block tag support
+ *
+ */
 
+public class ModConfig {
     private static File folder = new File("config/mechafactory");
     private static File configFile;
     private static Gson config = new GsonBuilder().setPrettyPrinting().create();
     public static ConfigInstance INSTANCE;
+    public static ConfigInstance ORIGINAL_INSTANCE;
 
     public static void init() {
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new SimpleSynchronousResourceReloadListener() {
@@ -38,6 +46,7 @@ public class ModConfig {
             @Override
             public void reload(ResourceManager manager) {
                 INSTANCE = new ConfigInstance();
+                ORIGINAL_INSTANCE = new ConfigInstance();
                 System.out.println("loading mecha resources");
 
                 boolean gotAnvilDefault = false,
@@ -46,7 +55,7 @@ public class ModConfig {
                         gotGeneratorDefault = false;
 
                 for (Identifier id : manager.findResources("factory-config", path -> path.endsWith(".json"))) {
-                    if (!id.getPath().matches("factory-config/(anvil|sieve|weathering|generator)+/[\\w_]+\\.json$")){
+                    if (!id.getPath().matches("factory-config/(anvil|sieve|weathering|generator)/[\\w_\\-]+\\.json$")){
                         System.out.println(id.getPath());
                         continue;
                     }
@@ -59,19 +68,19 @@ public class ModConfig {
                         switch (id.getPath().split("/")[1]) {
                             case "anvil" -> {
                                 loadConfig(id.getPath().split("/")[2], text, ConfigType.anvil);
-                                gotAnvilDefault = gotAnvilDefault || id.getPath().split("/")[2].equals("default.json");
+                                gotAnvilDefault = gotAnvilDefault || id.getPath().split("/")[2].matches("default([\\-_\\w]+)?\\.json");
                             }
                             case "sieve" -> {
                                 loadConfig(id.getPath().split("/")[2], text, ConfigType.sieve);
-                                gotSieveDefault = gotSieveDefault || id.getPath().split("/")[2].equals("default.json");
+                                gotSieveDefault = gotSieveDefault || id.getPath().split("/")[2].matches("default([\\-_\\w]+)?\\.json");
                             }
                             case "weathering" -> {
                                 loadConfig(id.getPath().split("/")[2], text, ConfigType.weathering);
-                                gotWeatheringDefault = gotWeatheringDefault || id.getPath().split("/")[2].equals("default.json");
+                                gotWeatheringDefault = gotWeatheringDefault || id.getPath().split("/")[2].matches("default([\\-_\\w]+)?\\.json");
                             }
                             case "generator" -> {
                                 loadConfig(id.getPath().split("/")[2], text, ConfigType.generator);
-                                gotGeneratorDefault = gotGeneratorDefault || id.getPath().split("/")[2].equals("default.json");
+                                gotGeneratorDefault = gotGeneratorDefault || id.getPath().split("/")[2].matches("default([\\-_\\w]+)?\\.json");
                             }
                         }
                     } catch (Exception e) {
@@ -79,17 +88,26 @@ public class ModConfig {
                     }
                 }
 
-                if (!gotAnvilDefault)
-                    INSTANCE.initAnvilMap();
+                if (!gotAnvilDefault){
+                    INSTANCE.anvilMap.putAll(ORIGINAL_INSTANCE.anvilMap);
+                    INSTANCE.specialAnvilMap.putAll(ORIGINAL_INSTANCE.specialAnvilMap);
+                    //INSTANCE.initAnvilMap();
+                }
 
-                if (!gotSieveDefault)
-                    INSTANCE.initSieveMap();
+                if (!gotSieveDefault) {
+                    INSTANCE.sieveMap.putAll(ORIGINAL_INSTANCE.sieveMap);
+                    //INSTANCE.initSieveMap();
+                }
 
-                if (!gotWeatheringDefault)
-                    INSTANCE.initWeatherMap();
+                if (!gotWeatheringDefault) {
+                    //INSTANCE.initWeatherMap();
+                    INSTANCE.weatheringMap.combine(ORIGINAL_INSTANCE.weatheringMap);
+                }
 
-                if (!gotGeneratorDefault)
-                    INSTANCE.initGeneratorMap();
+                if (!gotGeneratorDefault) {
+                    //INSTANCE.initGeneratorMap();
+                    INSTANCE.generatorMap.addAll(ORIGINAL_INSTANCE.generatorMap);
+                }
             }
         });
     }
@@ -97,7 +115,7 @@ public class ModConfig {
     public static void loadConfig(String name, String innerText, ConfigType type) {
         JsonArray array = JsonParser.parseString(innerText).getAsJsonArray();
 
-        for (JsonElement elem : array) {
+        OUTER_LOOP: for (JsonElement elem : array) {
             JsonObject obj = elem.getAsJsonObject();
 
             if (type == ConfigType.anvil) {
@@ -120,7 +138,7 @@ public class ModConfig {
                                 inputBorF.add(new BlockOrFluid(Registry.BLOCK.get(new Identifier(inputElem.getAsString()))));
                             } else {
                                 MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, input is dodgy missing");
-                                continue;
+                                continue OUTER_LOOP;
                             }
                         }
                     } else {
@@ -144,12 +162,94 @@ public class ModConfig {
 
                 System.out.println("found anvil");
 
-                if (inputB.size() > 0) {
-                    INSTANCE.anvilMap.put(inputB, output);
+                if (name.matches("original([\\-_\\w]+)?\\.json")){
+                    if (inputB.size() > 0) {
+                        ORIGINAL_INSTANCE.anvilMap.put(inputB, output);
+                    } else {
+                        ORIGINAL_INSTANCE.specialAnvilMap.put(inputBorF, output);
+                    }
                 } else {
-                    INSTANCE.specialAnvilMap.put(inputBorF, output);
+                    if (inputB.size() > 0) {
+                        INSTANCE.anvilMap.put(inputB, output);
+                    } else {
+                        INSTANCE.specialAnvilMap.put(inputBorF, output);
+                    }
                 }
             } else if (type == ConfigType.sieve) {
+                Item input;
+                int weighing = -1;
+                int ticks;
+
+                if (obj.has("input")) {
+                    input = Registry.ITEM.get(new Identifier(obj.get("input").getAsString()));
+                } else {
+                    MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, input missing");
+                    continue;
+                }
+
+                if (obj.has("weighing")) {
+                    weighing = obj.get("weighing").getAsInt();
+                }
+
+                if (obj.has("ticks")) {
+                    ticks = obj.get("ticks").getAsInt();
+                } else {
+                    MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, ticks missing");
+                    continue;
+                }
+
+                SieveIdentifier sieveIdentifier = new SieveIdentifier(weighing, ticks);
+
+                if (obj.has("outputs")) {
+                    for (JsonElement inputElem : obj.get("outputs").getAsJsonArray()) {
+                        int subWeighing, min, max;
+                        Item item;
+                        JsonObject outputObj = inputElem.getAsJsonObject();
+
+                        if (obj.has("weighing")) {
+                            subWeighing = obj.get("wighing").getAsInt();
+                        } else {
+                            MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, weighing missing");
+                            continue OUTER_LOOP;
+                        }
+
+                        if (obj.has("min")) {
+                            min = obj.get("min").getAsInt();
+                        } else {
+                            MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, min missing");
+                            continue OUTER_LOOP;
+                        }
+
+                        if (obj.has("max")) {
+                            max = obj.get("max").getAsInt();
+                        } else {
+                            MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, max missing");
+                            continue OUTER_LOOP;
+                        }
+
+                        if (obj.has("item")) {
+                            item = Registry.ITEM.get(new Identifier(obj.get("item").getAsString()));
+                        } else {
+                            MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, item missing");
+                            continue OUTER_LOOP;
+                        }
+
+                        sieveIdentifier.put(subWeighing, min, max, item);
+                    }
+                } else {
+                    MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, output missing");
+                    continue;
+                }
+
+                if (weighing == -1) {
+                    sieveIdentifier.updateDefaultWeighing();
+                }
+
+                if (name.matches("original([\\-_\\w]+)?\\.json")) {
+                    ORIGINAL_INSTANCE.sieveMap.put(input, sieveIdentifier);
+                } else {
+                    INSTANCE.sieveMap.put(input, sieveIdentifier);
+                }
 
             } else if (type == ConfigType.weathering) {
                 Block input, output;
@@ -184,7 +284,12 @@ public class ModConfig {
                     continue;
                 }
 
-                INSTANCE.weatheringMap.put(input, primary, output, probability);
+                if (name.matches("original([\\-_\\w]+)?\\.json")) {
+                    ORIGINAL_INSTANCE.weatheringMap.put(input, primary, output, probability);
+                } else {
+                    INSTANCE.weatheringMap.put(input, primary, output, probability);
+                }
+
             } else if (type == ConfigType.generator) {
                 Fluid primary, secondaryF = null;
                 Block secondaryB = null, under = null, output;
@@ -208,15 +313,20 @@ public class ModConfig {
                     under = Registry.BLOCK.get(new Identifier(obj.get("underneath_block").getAsString()));
                 }
 
-                if (obj.has("output")) {
-                    output = Registry.BLOCK.get(new Identifier(obj.get("output").getAsString()));
+                if (obj.has("output_block")) {
+                    output = Registry.BLOCK.get(new Identifier(obj.get("output_block").getAsString()));
                 } else {
                     MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, output missing");
                     continue;
                 }
 
                 System.out.println("found generator");
-                INSTANCE.generatorMap.add(new GeneratorIdentifier(primary, secondaryF, secondaryB, under, output));
+                if (name.matches("original([\\-_\\w]+)?\\.json")) {
+                    ORIGINAL_INSTANCE.generatorMap.add(new GeneratorIdentifier(primary, secondaryF, secondaryB, under, output));
+                } else {
+                    INSTANCE.generatorMap.add(new GeneratorIdentifier(primary, secondaryF, secondaryB, under, output));
+                }
+
             }
         }
     }

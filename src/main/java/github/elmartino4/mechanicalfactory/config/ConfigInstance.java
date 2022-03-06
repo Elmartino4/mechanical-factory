@@ -35,6 +35,14 @@ public class ConfigInstance {
         return newInstance;
     }
 
+    public void merge(ConfigInstance otherInstance) {
+        anvilMap.putAll(otherInstance.anvilMap);
+        specialAnvilMap.putAll(otherInstance.specialAnvilMap);
+        generatorMap.addAll(otherInstance.generatorMap);
+        sieveMap.putAll(otherInstance.sieveMap);
+        weatheringMap.combine(otherInstance.weatheringMap);
+    }
+
     public void initAnvilMap(){
         anvilMap.put(Arrays.asList(Blocks.STONE), Arrays.asList(Blocks.COBBLESTONE));
         anvilMap.put(Arrays.asList(Blocks.COBBLESTONE), Arrays.asList(Blocks.GRAVEL));
@@ -79,7 +87,7 @@ public class ConfigInstance {
         specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.SAND)), Arrays.asList(Blocks.RED_SAND));
         specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_WATER), new BlockOrFluid(Blocks.SAND)), Arrays.asList(Blocks.CLAY));
 
-        List<BlockOrFluid> list = Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.NETHERRACK));
+        //List<BlockOrFluid> list = Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.NETHERRACK));
         //System.out.println(list + " @ " + list.hashCode());
     }
 

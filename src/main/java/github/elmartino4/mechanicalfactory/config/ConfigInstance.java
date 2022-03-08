@@ -1,5 +1,9 @@
 package github.elmartino4.mechanicalfactory.config;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import github.elmartino4.mechanicalfactory.util.BlockOrFluid;
 import github.elmartino4.mechanicalfactory.util.GeneratorIdentifier;
 import github.elmartino4.mechanicalfactory.util.SieveIdentifier;
@@ -9,11 +13,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.util.registry.Registry;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ConfigInstance {
     public HashMap<List<Block>, List<Block>> anvilMap = new HashMap<>();
@@ -24,17 +26,6 @@ public class ConfigInstance {
 
     public HashMap<Item, SieveIdentifier> sieveMap = new HashMap<>();
 
-    public static ConfigInstance getDefault(){
-        ConfigInstance newInstance = new ConfigInstance();
-
-        newInstance.initAnvilMap();
-        newInstance.initGeneratorMap();
-        newInstance.initWeatherMap();
-        newInstance.initSieveMap();
-
-        return newInstance;
-    }
-
     public void merge(ConfigInstance otherInstance) {
         anvilMap.putAll(otherInstance.anvilMap);
         specialAnvilMap.putAll(otherInstance.specialAnvilMap);
@@ -43,74 +34,41 @@ public class ConfigInstance {
         weatheringMap.combine(otherInstance.weatheringMap);
     }
 
-    public void initAnvilMap(){
-        anvilMap.put(Arrays.asList(Blocks.STONE), Arrays.asList(Blocks.COBBLESTONE));
-        anvilMap.put(Arrays.asList(Blocks.COBBLESTONE), Arrays.asList(Blocks.GRAVEL));
-        anvilMap.put(Arrays.asList(Blocks.MOSSY_COBBLESTONE), Arrays.asList(Blocks.GRAVEL));
-        anvilMap.put(Arrays.asList(Blocks.SANDSTONE), Arrays.asList(Blocks.SAND));
-        anvilMap.put(Arrays.asList(Blocks.GRAVEL), Arrays.asList(Blocks.SAND));
+    public static String sieveMapJson() {
+        ConfigInstance inst = new ConfigInstance();
+        inst.initSieveMap();
 
-        anvilMap.put(Arrays.asList(Blocks.STONE, Blocks.GRAVEL), Arrays.asList(Blocks.ANDESITE));
-        anvilMap.put(Arrays.asList(Blocks.GRAVEL, Blocks.STONE), Arrays.asList(Blocks.ANDESITE));
+        JsonArray outObj = new JsonArray();
 
-        anvilMap.put(Arrays.asList(Blocks.COBBLESTONE, Blocks.GRAVEL), Arrays.asList(Blocks.TUFF));
-        anvilMap.put(Arrays.asList(Blocks.GRAVEL, Blocks.COBBLESTONE), Arrays.asList(Blocks.TUFF));
 
-        anvilMap.put(Arrays.asList(Blocks.TUFF, Blocks.GRAVEL), Arrays.asList(Blocks.DEEPSLATE));
-        anvilMap.put(Arrays.asList(Blocks.GRAVEL, Blocks.TUFF), Arrays.asList(Blocks.DEEPSLATE));
+        for (Map.Entry<Item, SieveIdentifier> entry : inst.sieveMap.entrySet()) {
+            JsonObject entryObj = new JsonObject();
+            entryObj.add("input", new JsonPrimitive(Registry.ITEM.getId(entry.getKey()).toString()));
 
-        anvilMap.put(Arrays.asList(Blocks.NETHERRACK, Blocks.SOUL_SOIL), Arrays.asList(Blocks.SOUL_SOIL, Blocks.SOUL_SAND));
+            entryObj.add("total_weight", new JsonPrimitive(entry.getValue().defaultWeighing));
+            entryObj.add("delay", new JsonPrimitive(entry.getValue().delayTicks));
 
-        anvilMap.put(Arrays.asList(Blocks.STONE_BRICKS), Arrays.asList(Blocks.CRACKED_STONE_BRICKS));
-        anvilMap.put(Arrays.asList(Blocks.DEEPSLATE_BRICKS), Arrays.asList(Blocks.CRACKED_DEEPSLATE_BRICKS));
+            JsonArray dataArray = new JsonArray();
+            for (SieveIdentifier.OutItemData data : entry.getValue().data) {
+                JsonObject dataObj = new JsonObject();
 
-        anvilMap.put(Arrays.asList(Blocks.ANDESITE, Blocks.SAND), Arrays.asList(Blocks.CALCITE));
-        anvilMap.put(Arrays.asList(Blocks.SAND, Blocks.ANDESITE), Arrays.asList(Blocks.CALCITE));
+                dataObj.add("weight", new JsonPrimitive(data.getWeighing()));
 
-        anvilMap.put(Arrays.asList(Blocks.STONE, Blocks.SAND), Arrays.asList(Blocks.DIORITE));
-        anvilMap.put(Arrays.asList(Blocks.SAND, Blocks.STONE), Arrays.asList(Blocks.DIORITE));
+                dataObj.add("min", new JsonPrimitive(data.minRange));
+                dataObj.add("max", new JsonPrimitive(data.maxRange));
+                dataObj.add("item", new JsonPrimitive(Registry.ITEM.getId(data.item).toString()));
 
-        anvilMap.put(Arrays.asList(Blocks.STONE, Blocks.GRAVEL), Arrays.asList(Blocks.ANDESITE));
-        anvilMap.put(Arrays.asList(Blocks.GRAVEL, Blocks.STONE), Arrays.asList(Blocks.ANDESITE));
+                dataArray.add(dataObj);
+            }
 
-        anvilMap.put(Arrays.asList(Blocks.STONE, Blocks.RED_SAND), Arrays.asList(Blocks.GRANITE));
-        anvilMap.put(Arrays.asList(Blocks.RED_SAND, Blocks.STONE), Arrays.asList(Blocks.GRANITE));
+            entryObj.add("outputs", dataArray);
 
-        anvilMap.put(Arrays.asList(Blocks.MOSSY_COBBLESTONE, Blocks.ICE), Arrays.asList(Blocks.PRISMARINE));
-        anvilMap.put(Arrays.asList(Blocks.ICE, Blocks.MOSSY_COBBLESTONE), Arrays.asList(Blocks.PRISMARINE));
+            outObj.add(entryObj);
+        }
 
-        anvilMap.put(Arrays.asList(Blocks.FROSTED_ICE, Blocks.FROSTED_ICE, Blocks.FROSTED_ICE), Arrays.asList(Blocks.ICE));
-        anvilMap.put(Arrays.asList(Blocks.ICE, Blocks.ICE, Blocks.ICE), Arrays.asList(Blocks.PACKED_ICE));
-        anvilMap.put(Arrays.asList(Blocks.PACKED_ICE, Blocks.PACKED_ICE, Blocks.PACKED_ICE), Arrays.asList(Blocks.BLUE_ICE));
 
-        specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.NETHERRACK)), Arrays.asList(Blocks.MAGMA_BLOCK));
-        specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.SAND)), Arrays.asList(Blocks.RED_SAND));
-        specialAnvilMap.put(Arrays.asList(new BlockOrFluid(Fluids.FLOWING_WATER), new BlockOrFluid(Blocks.SAND)), Arrays.asList(Blocks.CLAY));
-
-        //List<BlockOrFluid> list = Arrays.asList(new BlockOrFluid(Fluids.FLOWING_LAVA), new BlockOrFluid(Blocks.NETHERRACK));
-        //System.out.println(list + " @ " + list.hashCode());
-    }
-
-    public void initGeneratorMap(){
-        generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_WATER, null, Blocks.BLUE_ICE, null, Blocks.FROSTED_ICE));
-        generatorMap.add(new GeneratorIdentifier(Fluids.WATER, null, Blocks.BLUE_ICE, null, Blocks.ICE));
-
-        generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA, Fluids.FLOWING_WATER, null, Blocks.PURPUR_BLOCK, Blocks.END_STONE));
-        generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA, Fluids.WATER, null, Blocks.PURPUR_BLOCK, Blocks.END_STONE));
-
-        generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA, Fluids.FLOWING_WATER, null, Blocks.NETHER_BRICKS, Blocks.NETHERRACK));
-        generatorMap.add(new GeneratorIdentifier(Fluids.FLOWING_LAVA, Fluids.WATER, null, Blocks.NETHER_BRICKS, Blocks.NETHERRACK));
-    }
-
-    public void initWeatherMap(){
-        weatheringMap.put(Blocks.COBBLESTONE, Fluids.WATER, Blocks.MOSSY_COBBLESTONE, 0.7F);
-        weatheringMap.put(Blocks.COBBLESTONE, Fluids.FLOWING_WATER, Blocks.MOSSY_COBBLESTONE, 0.3F);
-
-        weatheringMap.put(Blocks.OAK_LOG, Fluids.FLOWING_LAVA, Blocks.COAL_BLOCK, 0.9F);
-        weatheringMap.put(Blocks.OAK_LOG, Fluids.LAVA, Blocks.COAL_BLOCK, 1.0F);
-
-        weatheringMap.put(Blocks.STONE_BRICKS, Fluids.WATER, Blocks.MOSSY_STONE_BRICKS, 0.7F);
-        weatheringMap.put(Blocks.STONE_BRICKS, Fluids.FLOWING_WATER, Blocks.MOSSY_STONE_BRICKS, 0.3F);
+        System.out.println(outObj.toString());
+        return outObj.getAsString();
     }
 
     public void initSieveMap(){

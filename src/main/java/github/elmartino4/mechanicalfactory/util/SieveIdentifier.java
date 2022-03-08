@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class SieveIdentifier {
-    int defaultWeighing;
-    int delayTicks;
-    ArrayList<OutItemData> data = new ArrayList<>();
+    public int defaultWeighing;
+    public int delayTicks;
+    public ArrayList<OutItemData> data = new ArrayList<>();
 
     public SieveIdentifier(int defaultWeighing, int delayTicks) {
         this.delayTicks = delayTicks;
@@ -81,34 +81,35 @@ public class SieveIdentifier {
     public void setDefaultWeighing(int defaultWeighing) {
         this.defaultWeighing = defaultWeighing;
     }
+
+    public static class OutItemData {
+        public int weighing;
+        public int minRange;
+        public int maxRange;
+        public Item item;
+
+        public OutItemData(int weighing, int minRange, int maxRange, Item item) {
+            this.weighing = weighing;
+            this.minRange = minRange;
+            this.maxRange = maxRange;
+            this.item = item;
+        }
+
+        public ItemStack getStack() {
+            return getStack(new Random());
+        }
+
+        public ItemStack getStack(Random random) {
+            if (maxRange == minRange) return new ItemStack(item, minRange);
+
+            int quant = minRange + random.nextInt(maxRange - minRange);
+            //System.out.println(quant);
+            return new ItemStack(item, quant);
+        }
+
+        public int getWeighing() {
+            return weighing;
+        }
+    }
 }
 
-class OutItemData {
-    int weighing;
-    int minRange;
-    int maxRange;
-    Item item;
-
-    public OutItemData(int weighing, int minRange, int maxRange, Item item) {
-        this.weighing = weighing;
-        this.minRange = minRange;
-        this.maxRange = maxRange;
-        this.item = item;
-    }
-
-    public ItemStack getStack() {
-        return getStack(new Random());
-    }
-
-    public ItemStack getStack(Random random) {
-        if (maxRange == minRange) return new ItemStack(item, minRange);
-
-        int quant = minRange + random.nextInt(maxRange - minRange);
-        //System.out.println(quant);
-        return new ItemStack(item, quant);
-    }
-
-    public int getWeighing() {
-        return weighing;
-    }
-}

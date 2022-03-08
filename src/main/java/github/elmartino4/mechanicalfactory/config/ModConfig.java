@@ -16,6 +16,7 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
@@ -23,16 +24,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.apache.commons.io.IOUtils;
 
-// TODO:
-/*
- * add block tag support
- *
- */
-
 public class ModConfig {
-    private static File folder = new File("config/mechafactory");
-    private static File configFile;
-    private static Gson config = new GsonBuilder().setPrettyPrinting().create();
     public static ConfigInstance INSTANCE;
     public static ConfigInstance ORIGINAL_INSTANCE;
 
@@ -45,6 +37,13 @@ public class ModConfig {
 
             @Override
             public void reload(ResourceManager manager) {
+                System.out.println(ConfigInstance.sieveMapJson());
+
+                /*if (true) {
+                    throw new RuntimeException("ah yes a breakpoint");
+                }*/
+
+
                 INSTANCE = new ConfigInstance();
                 ORIGINAL_INSTANCE = new ConfigInstance();
                 System.out.println("loading mecha resources");
@@ -187,12 +186,12 @@ public class ModConfig {
                     continue;
                 }
 
-                if (obj.has("weighing")) {
-                    weighing = obj.get("weighing").getAsInt();
+                if (obj.has("total_weight")) {
+                    weighing = obj.get("total_weight").getAsInt();
                 }
 
-                if (obj.has("ticks")) {
-                    ticks = obj.get("ticks").getAsInt();
+                if (obj.has("delay")) {
+                    ticks = obj.get("delay").getAsInt();
                 } else {
                     MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, ticks missing");
                     continue;
@@ -204,31 +203,31 @@ public class ModConfig {
                     for (JsonElement inputElem : obj.get("outputs").getAsJsonArray()) {
                         int subWeighing, min, max;
                         Item item;
-                        JsonObject outputObj = inputElem.getAsJsonObject();
+                        JsonObject subObj = inputElem.getAsJsonObject();
 
-                        if (obj.has("weighing")) {
-                            subWeighing = obj.get("wighing").getAsInt();
+                        if (subObj.has("weight")) {
+                            subWeighing = subObj.get("weight").getAsInt();
                         } else {
                             MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, weighing missing");
                             continue OUTER_LOOP;
                         }
 
-                        if (obj.has("min")) {
-                            min = obj.get("min").getAsInt();
+                        if (subObj.has("min")) {
+                            min = subObj.get("min").getAsInt();
                         } else {
                             MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, min missing");
                             continue OUTER_LOOP;
                         }
 
-                        if (obj.has("max")) {
-                            max = obj.get("max").getAsInt();
+                        if (subObj.has("max")) {
+                            max = subObj.get("max").getAsInt();
                         } else {
                             MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, max missing");
                             continue OUTER_LOOP;
                         }
 
-                        if (obj.has("item")) {
-                            item = Registry.ITEM.get(new Identifier(obj.get("item").getAsString()));
+                        if (subObj.has("item")) {
+                            item = Registry.ITEM.get(new Identifier(subObj.get("item").getAsString()));
                         } else {
                             MechanicalFactory.LOGGER.error("Bad datapack file {" + name + "}, item missing");
                             continue OUTER_LOOP;

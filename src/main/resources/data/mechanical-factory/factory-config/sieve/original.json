@@ -1,0 +1,550 @@
+[
+  {
+    "input": "minecraft:gravel",
+    "total_weight": 22,
+    "delay": 45,
+    "outputs": [
+      {
+        "weight": 20,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:flint"
+      },
+      {
+        "weight": 2,
+        "min": 4,
+        "max": 8,
+        "item": "minecraft:flint"
+      },
+      {
+        "weight": 8,
+        "min": 1,
+        "max": 4,
+        "item": "minecraft:coal"
+      },
+      {
+        "weight": 2,
+        "min": 5,
+        "max": 12,
+        "item": "minecraft:coal"
+      },
+      {
+        "weight": 2,
+        "min": 2,
+        "max": 4,
+        "item": "minecraft:raw_iron"
+      },
+      {
+        "weight": 1,
+        "min": 2,
+        "max": 4,
+        "item": "minecraft:raw_gold"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:netherrack",
+    "total_weight": 6,
+    "delay": 70,
+    "outputs": [
+      {
+        "weight": 3,
+        "min": 1,
+        "max": 3,
+        "item": "minecraft:quartz"
+      },
+      {
+        "weight": 3,
+        "min": 2,
+        "max": 6,
+        "item": "minecraft:gold_nugget"
+      },
+      {
+        "weight": 7,
+        "min": 1,
+        "max": 10,
+        "item": "minecraft:rotten_flesh"
+      },
+      {
+        "weight": 2,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:gold_ingot"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:dirt",
+    "total_weight": 12,
+    "delay": 50,
+    "outputs": [
+      {
+        "weight": 8,
+        "min": 2,
+        "max": 3,
+        "item": "minecraft:wheat_seeds"
+      },
+      {
+        "weight": 5,
+        "min": 2,
+        "max": 3,
+        "item": "minecraft:beetroot_seeds"
+      },
+      {
+        "weight": 4,
+        "min": 1,
+        "max": 3,
+        "item": "minecraft:melon_seeds"
+      },
+      {
+        "weight": 4,
+        "min": 1,
+        "max": 3,
+        "item": "minecraft:pumpkin_seeds"
+      },
+      {
+        "weight": 5,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:potato"
+      },
+      {
+        "weight": 5,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:carrot"
+      },
+      {
+        "weight": 9,
+        "min": 2,
+        "max": 4,
+        "item": "minecraft:bone_meal"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:granite",
+    "total_weight": 6,
+    "delay": 70,
+    "outputs": [
+      {
+        "weight": 5,
+        "min": 3,
+        "max": 8,
+        "item": "minecraft:raw_copper"
+      },
+      {
+        "weight": 6,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:stone"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:soul_sand",
+    "total_weight": 8,
+    "delay": 40,
+    "outputs": [
+      {
+        "weight": 4,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:crimson_fungus"
+      },
+      {
+        "weight": 4,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:warped_fungus"
+      },
+      {
+        "weight": 1,
+        "min": 1,
+        "max": 3,
+        "item": "minecraft:ghast_tear"
+      },
+      {
+        "weight": 3,
+        "min": 2,
+        "max": 5,
+        "item": "minecraft:nether_wart"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:sand",
+    "total_weight": 28,
+    "delay": 40,
+    "outputs": [
+      {
+        "weight": 8,
+        "min": 2,
+        "max": 3,
+        "item": "minecraft:clay_ball"
+      },
+      {
+        "weight": 3,
+        "min": 1,
+        "max": 3,
+        "item": "minecraft:quartz"
+      },
+      {
+        "weight": 2,
+        "min": 2,
+        "max": 3,
+        "item": "minecraft:raw_iron"
+      },
+      {
+        "weight": 3,
+        "min": 2,
+        "max": 3,
+        "item": "minecraft:raw_copper"
+      },
+      {
+        "weight": 12,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:cactus"
+      },
+      {
+        "weight": 14,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:coarse_dirt"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:clay",
+    "total_weight": 16,
+    "delay": 35,
+    "outputs": [
+      {
+        "weight": 10,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:gravel"
+      },
+      {
+        "weight": 14,
+        "min": 1,
+        "max": 3,
+        "item": "minecraft:flint"
+      },
+      {
+        "weight": 6,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:emerald"
+      },
+      {
+        "weight": 9,
+        "min": 3,
+        "max": 4,
+        "item": "minecraft:raw_copper"
+      },
+      {
+        "weight": 6,
+        "min": 2,
+        "max": 3,
+        "item": "minecraft:raw_gold"
+      },
+      {
+        "weight": 1,
+        "min": 5,
+        "max": 8,
+        "item": "minecraft:raw_gold"
+      },
+      {
+        "weight": 9,
+        "min": 3,
+        "max": 4,
+        "item": "minecraft:raw_iron"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:tuff",
+    "total_weight": 5,
+    "delay": 70,
+    "outputs": [
+      {
+        "weight": 3,
+        "min": 3,
+        "max": 7,
+        "item": "minecraft:raw_iron"
+      },
+      {
+        "weight": 4,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:stone"
+      },
+      {
+        "weight": 1,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:deepslate"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:red_sand",
+    "total_weight": 12,
+    "delay": 40,
+    "outputs": [
+      {
+        "weight": 14,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:sand"
+      },
+      {
+        "weight": 3,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:redstone"
+      },
+      {
+        "weight": 2,
+        "min": 1,
+        "max": 3,
+        "item": "minecraft:gunpowder"
+      },
+      {
+        "weight": 3,
+        "min": 2,
+        "max": 4,
+        "item": "minecraft:glowstone_dust"
+      },
+      {
+        "weight": 2,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:blaze_powder"
+      },
+      {
+        "weight": 4,
+        "min": 2,
+        "max": 5,
+        "item": "minecraft:raw_gold"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:grass_block",
+    "total_weight": 2,
+    "delay": 50,
+    "outputs": [
+      {
+        "weight": 10,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:dirt"
+      },
+      {
+        "weight": 2,
+        "min": 1,
+        "max": 3,
+        "item": "minecraft:oak_sapling"
+      },
+      {
+        "weight": 2,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:spruce_sapling"
+      },
+      {
+        "weight": 2,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:birch_sapling"
+      },
+      {
+        "weight": 1,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:acacia_sapling"
+      },
+      {
+        "weight": 1,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:jungle_sapling"
+      },
+      {
+        "weight": 3,
+        "min": 2,
+        "max": 4,
+        "item": "minecraft:pumpkin_seeds"
+      },
+      {
+        "weight": 3,
+        "min": 2,
+        "max": 4,
+        "item": "minecraft:melon_slice"
+      },
+      {
+        "weight": 4,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:sugar_cane"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:end_stone",
+    "total_weight": 25,
+    "delay": 70,
+    "outputs": [
+      {
+        "weight": 10,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:purpur_block"
+      },
+      {
+        "weight": 3,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:chorus_fruit"
+      },
+      {
+        "weight": 20,
+        "min": 1,
+        "max": 5,
+        "item": "minecraft:chorus_fruit"
+      },
+      {
+        "weight": 15,
+        "min": 1,
+        "max": 5,
+        "item": "minecraft:popped_chorus_fruit"
+      },
+      {
+        "weight": 1,
+        "min": 1,
+        "max": 3,
+        "item": "minecraft:shulker_shell"
+      },
+      {
+        "weight": 2,
+        "min": 2,
+        "max": 2,
+        "item": "minecraft:phantom_membrane"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:flint",
+    "total_weight": 16,
+    "delay": 35,
+    "outputs": [
+      {
+        "weight": 8,
+        "min": 2,
+        "max": 5,
+        "item": "minecraft:iron_nugget"
+      },
+      {
+        "weight": 3,
+        "min": 7,
+        "max": 12,
+        "item": "minecraft:iron_nugget"
+      },
+      {
+        "weight": 1,
+        "min": 14,
+        "max": 30,
+        "item": "minecraft:iron_nugget"
+      },
+      {
+        "weight": 10,
+        "min": 1,
+        "max": 3,
+        "item": "minecraft:coal"
+      },
+      {
+        "weight": 4,
+        "min": 4,
+        "max": 6,
+        "item": "minecraft:coal"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:prismarine",
+    "total_weight": 8,
+    "delay": 70,
+    "outputs": [
+      {
+        "weight": 3,
+        "min": 1,
+        "max": 4,
+        "item": "minecraft:prismarine_shard"
+      },
+      {
+        "weight": 3,
+        "min": 1,
+        "max": 4,
+        "item": "minecraft:prismarine_crystals"
+      },
+      {
+        "weight": 2,
+        "min": 1,
+        "max": 2,
+        "item": "minecraft:wet_sponge"
+      },
+      {
+        "weight": 7,
+        "min": 3,
+        "max": 5,
+        "item": "minecraft:cod"
+      },
+      {
+        "weight": 6,
+        "min": 3,
+        "max": 5,
+        "item": "minecraft:salmon"
+      },
+      {
+        "weight": 4,
+        "min": 3,
+        "max": 4,
+        "item": "minecraft:tropical_fish"
+      },
+      {
+        "weight": 3,
+        "min": 2,
+        "max": 4,
+        "item": "minecraft:pufferfish"
+      }
+    ]
+  },
+  {
+    "input": "minecraft:terracotta",
+    "total_weight": 3,
+    "delay": 70,
+    "outputs": [
+      {
+        "weight": 15,
+        "min": 2,
+        "max": 5,
+        "item": "minecraft:clay_ball"
+      },
+      {
+        "weight": 3,
+        "min": 6,
+        "max": 12,
+        "item": "minecraft:clay_ball"
+      },
+      {
+        "weight": 6,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:coarse_dirt"
+      }
+    ]
+  }
+]

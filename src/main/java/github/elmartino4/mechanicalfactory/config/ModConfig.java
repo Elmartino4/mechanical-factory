@@ -4,7 +4,6 @@ package github.elmartino4.mechanicalfactory.config;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.google.gson.*;
@@ -16,7 +15,6 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
@@ -37,13 +35,6 @@ public class ModConfig {
 
             @Override
             public void reload(ResourceManager manager) {
-                System.out.println(ConfigInstance.sieveMapJson());
-
-                /*if (true) {
-                    throw new RuntimeException("ah yes a breakpoint");
-                }*/
-
-
                 INSTANCE = new ConfigInstance();
                 ORIGINAL_INSTANCE = new ConfigInstance();
                 System.out.println("loading mecha resources");
@@ -122,6 +113,7 @@ public class ModConfig {
                 List<BlockOrFluid> inputBorF = new ArrayList<>();;
                 List<Block> output = new ArrayList<>();
 
+
                 if (obj.has("input")) {
                     boolean containsFluids = false;
 
@@ -163,6 +155,7 @@ public class ModConfig {
 
                 if (name.matches("original([\\-_\\w]+)?\\.json")){
                     if (inputB.size() > 0) {
+
                         ORIGINAL_INSTANCE.anvilMap.put(inputB, output);
                     } else {
                         ORIGINAL_INSTANCE.specialAnvilMap.put(inputBorF, output);

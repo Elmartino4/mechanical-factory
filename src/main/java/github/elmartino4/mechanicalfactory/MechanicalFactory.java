@@ -16,9 +16,6 @@ public class MechanicalFactory implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Loaded Mechanical Factory");
 
-
-
-		//throw new RuntimeException("your mum gae");
 		ModConfig.init();
 	}
 }

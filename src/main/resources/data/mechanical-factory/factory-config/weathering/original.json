@@ -1,0 +1,38 @@
+[
+  {
+    "fluid": "minecraft:water",
+    "input": "minecraft:cobblestone",
+    "output": "minecraft:mossy_cobblestone",
+    "probability": 0.7
+  },
+  {
+    "fluid": "minecraft:water",
+    "input": "minecraft:stone_bricks",
+    "output": "minecraft:mossy_stone_bricks",
+    "probability": 0.7
+  },
+  {
+    "fluid": "minecraft:lava",
+    "input": "minecraft:oak_log",
+    "output": "minecraft:coal_block",
+    "probability": 0.7
+  },
+  {
+    "fluid": "minecraft:flowing_water",
+    "input": "minecraft:cobblestone",
+    "output": "minecraft:mossy_cobblestone",
+    "probability": 0.3
+  },
+  {
+    "fluid": "minecraft:flowing_water",
+    "input": "minecraft:stone_bricks",
+    "output": "minecraft:mossy_stone_bricks",
+    "probability": 0.3
+  },
+  {
+    "fluid": "minecraft:flowing_lava",
+    "input": "minecraft:oak_log",
+    "output": "minecraft:coal_block",
+    "probability": 0.3
+  }
+]

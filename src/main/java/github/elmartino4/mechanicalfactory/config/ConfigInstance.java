@@ -1,20 +1,31 @@
 package github.elmartino4.mechanicalfactory.config;
 
+import github.elmartino4.mechanicalfactory.util.BlockOrFluid;
+import github.elmartino4.mechanicalfactory.util.GeneratorIdentifier;
+import github.elmartino4.mechanicalfactory.util.SieveIdentifier;
+import github.elmartino4.mechanicalfactory.util.WeatheringMap;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.tag.Tag;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ConfigInstance {
-    //public HashMap<List<Integer>, List<Integer>> anvilMap = new HashMap<>();
+    public HashMap<List<Block>, List<Block>> anvilMap = new HashMap<>();
+    public HashMap<List<BlockOrFluid>, List<Block>> specialAnvilMap = new HashMap<>();
 
-    //public int scanDistance;
+    public ArrayList<GeneratorIdentifier> generatorMap = new ArrayList<>();
+    public WeatheringMap weatheringMap = new WeatheringMap();
 
-    public ConfigInstance(){
-        //scanDistance = 2;
+    public HashMap<Item, SieveIdentifier> sieveMap = new HashMap<>();
+
+    /*public void merge(ConfigInstance otherInstance) {
+        anvilMap.putAll(otherInstance.anvilMap);
+        specialAnvilMap.putAll(otherInstance.specialAnvilMap);
+        generatorMap.addAll(otherInstance.generatorMap);
+        sieveMap.putAll(otherInstance.sieveMap);
+        weatheringMap.combine(otherInstance.weatheringMap);
+    }*/
 
 
-    }
 }

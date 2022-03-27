@@ -1,6 +1,7 @@
 package github.elmartino4.mechanicalfactory.mixin;
 
 import github.elmartino4.mechanicalfactory.MechanicalFactory;
+import github.elmartino4.mechanicalfactory.config.ModConfig;
 import github.elmartino4.mechanicalfactory.util.DispenserBlockEntityAccess;
 import github.elmartino4.mechanicalfactory.util.SieveIdentifier;
 import net.minecraft.block.Block;
@@ -170,7 +171,7 @@ public abstract class DispenserBlockMixin {
 
             //System.out.println("cancelled partly +1");
 
-            SieveIdentifier id = MechanicalFactory.sieveMap.get(itm);
+            SieveIdentifier id = ModConfig.INSTANCE.sieveMap.get(itm);
 
             if(id == null){
                 ((DispenserBlockEntityAccess)ent).setItem(null);

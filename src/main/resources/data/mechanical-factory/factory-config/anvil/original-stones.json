@@ -1,0 +1,184 @@
+[
+  {
+    "input": [
+      "minecraft:stone"
+    ],
+    "output": [
+      "minecraft:cobblestone"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:cobblestone"
+    ],
+    "output": [
+      "minecraft:gravel"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:mossy_cobblestone"
+    ],
+    "output": [
+      "minecraft:gravel"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:sandstone"
+    ],
+    "output": [
+      "minecraft:sand"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:gravel"
+    ],
+    "output": [
+      "minecraft:sand"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:stone",
+      "minecraft:gravel"
+    ],
+    "output": [
+      "minecraft:andesite"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:gravel",
+      "minecraft:stone"
+    ],
+    "output": [
+      "minecraft:andesite"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:cobblestone",
+      "minecraft:gravel"
+    ],
+    "output": [
+      "minecraft:tuff"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:gravel",
+      "minecraft:cobblestone"
+    ],
+    "output": [
+      "minecraft:tuff"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:gravel",
+      "minecraft:tuff"
+    ],
+    "output": [
+      "minecraft:deepslate"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:tuff",
+      "minecraft:gravel"
+    ],
+    "output": [
+      "minecraft:deepslate"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:stone_bricks"
+    ],
+    "output": [
+      "minecraft:cracked_stone_bricks"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:deepslate_bricks"
+    ],
+    "output": [
+      "minecraft:cracked_deepslate_bricks"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:andesite",
+      "minecraft:sand"
+    ],
+    "output": [
+      "minecraft:calcite"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:sand",
+      "minecraft:andesite"
+    ],
+    "output": [
+      "minecraft:calcite"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:stone",
+      "minecraft:sand"
+    ],
+    "output": [
+      "minecraft:diorite"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:sand",
+      "minecraft:stone"
+    ],
+    "output": [
+      "minecraft:diorite"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:red_sand",
+      "minecraft:stone"
+    ],
+    "output": [
+      "minecraft:granite"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:stone",
+      "minecraft:red_sand"
+    ],
+    "output": [
+      "minecraft:granite"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:ice",
+      "minecraft:mossy_cobblestone"
+    ],
+    "output": [
+      "minecraft:prismarine"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:mossy_cobblestone",
+      "minecraft:ice"
+    ],
+    "output": [
+      "minecraft:prismarine"
+    ]
+  }
+]

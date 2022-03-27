@@ -1,0 +1,59 @@
+[
+  {
+    "input": [
+      "minecraft:frosted_ice",
+      "minecraft:frosted_ice",
+      "minecraft:frosted_ice"
+    ],
+    "output": [
+      "minecraft:ice"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:ice",
+      "minecraft:ice",
+      "minecraft:ice"
+    ],
+    "output": [
+      "minecraft:packed_ice"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:packed_ice",
+      "minecraft:packed_ice",
+      "minecraft:packed_ice"
+    ],
+    "output": [
+      "minecraft:blue_ice"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:flowing_lava",
+      "minecraft:netherrack"
+    ],
+    "output": [
+      "minecraft:magma_block"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:flowing_lava",
+      "minecraft:sand"
+    ],
+    "output": [
+      "minecraft:red_sand"
+    ]
+  },
+  {
+    "input": [
+      "minecraft:flowing_water",
+      "minecraft:sand"
+    ],
+    "output": [
+      "minecraft:clay"
+    ]
+  }
+]

@@ -58,13 +58,14 @@ public class EmptyBucketDispenserBehaviorMixin {
                 stack.decrement(1);
                 if (stack.isEmpty()) {
                     cir.setReturnValue(new ItemStack(item2));
-                }else{
                     world.emitGameEvent((Entity)null, GameEvent.FLUID_PICKUP, outPos);
-                    if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(item2)) < 0) {
+                }else{
+                    if (((DispenserBlockEntity)pointer.getBlockEntity()).addToFirstFreeSlot(new ItemStack(item2)) < 0)
                         this.fallbackBehavior.dispense(pointer, new ItemStack(item2));
-                        cir.setReturnValue(stack);
-                    }
+
+                    cir.setReturnValue(stack);
                 }
+                System.out.println(cir.getReturnValue().toString());
             }
         }
     }

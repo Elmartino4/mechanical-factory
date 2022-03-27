@@ -2,6 +2,89 @@
 ## Description
 A factory style mod that uses mechanical processes to generate blocks items etc. All intended to work with vanilla clients.
 
+## Data driven _recipes_
+Put a .json folder with any name into a datapack within the folders anvil, generator, sieve, or weathering.
+Call the json file "default(-optionaltext).json" to overwrite the original recipes.
+Files named "original(-optionaltext).json" can be overwritten by default files.
+
+### Anvil recipes
+```json
+[
+  {
+    "input": [
+      "minecraft:input_block_one",
+      "modid:input_block_two",
+      "anothermodid:input_block_there"
+    ],
+    "ouput": [
+      "minecraft:output_block_one",
+      "modid:output_block_two"
+    ]
+  }
+]
+```
+
+In the recipe object, `"mixed": false`, can be included to only allow the recipe in the given order, otherwise every permutation of the inputs is included.
+The `"mixed"` field defaults to true.
+
+### Generator recipes
+```json
+[
+  {
+    "primary_fluid": "minecraft:water",
+    "secondary_block": "minecraft:blue_ice",
+    "output_block": "minecraft:ice"
+  },
+  {
+    "primary_fluid": "minecraft:flowing_lava",
+    "secondary_fluid": "minecraft:water",
+    "underneath_block": "minecraft:nether_bricks",
+    "output_block": "minecraft:netherrack"
+  }
+]
+```
+
+### Sieve recipes
+```json
+[
+  {
+    "input": [
+      "minecraft:input_block_one",
+      "modid:input_block_two",
+      "anothermodid:input_block_there"
+    ],
+    "ouput": [
+      "minecraft:output_block_one",
+      "modid:output_block_two"
+    ]
+  }
+]
+```
+
+### Weathering recipes
+```json
+[
+  {
+    "input": "minecraft:granite",
+    "total_weight": 6,
+    "delay": 70,
+    "outputs": [
+      {
+        "weight": 5,
+        "min": 3,
+        "max": 8,
+        "item": "minecraft:raw_copper"
+      },
+      {
+        "weight": 6,
+        "min": 1,
+        "max": 1,
+        "item": "minecraft:stone"
+      }
+    ]
+  }
+]
+```
 
 ### Anvil :green_circle:
 - cobble -> gravel
@@ -24,7 +107,7 @@ A factory style mod that uses mechanical processes to generate blocks items etc.
 ### Seive :green_circle:
 works by dispensing an input into a scaffolding, after a specific amount of time an item is dropped and the scaffolding is broken
 
-further details at [this page](https://github.com/Elmartino4/mechanical-factory/blob/1.17/Item_Chances.md)
+further details at [this page](https://github.com/Elmartino4/mechanical-factory/blob/1.18/Item_Chances.md)
 
 ### Generator :green_circle:
 - water + blue ice -> frosted ice
